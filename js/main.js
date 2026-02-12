@@ -75,33 +75,118 @@ if (themeToggle) {
   });
 }
 
-// ===== Animated Counter for Trust Stats =====
-const counters = document.querySelectorAll('.trust-stat .number');
-let countersAnimated = false;
+// ===== Animated CountUp for Stat Strips =====
+function parseStatValue(text) {
+  text = text.trim();
+  let prefix = '';
+  let suffix = '';
+  let target = 0;
+  let hasComma = false;
 
-function animateCounters() {
-  if (countersAnimated) return;
-
-  const trustBar = document.querySelector('.trust-bar');
-  if (!trustBar) return;
-
-  const rect = trustBar.getBoundingClientRect();
-  if (rect.top < window.innerHeight && rect.bottom > 0) {
-    countersAnimated = true;
-    counters.forEach((counter, i) => {
-      counter.style.opacity = '0';
-      counter.style.transform = 'translateY(10px)';
-      counter.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-
-      setTimeout(() => {
-        counter.style.opacity = '1';
-        counter.style.transform = 'translateY(0)';
-      }, i * 150);
-    });
+  // Handle < prefix
+  if (text.startsWith('<')) {
+    prefix = '<';
+    text = text.substring(1);
   }
+
+  // Handle % suffix
+  if (text.endsWith('%')) {
+    suffix = '%';
+    text = text.slice(0, -1);
+  }
+
+  // Handle M suffix
+  if (text.endsWith('M')) {
+    suffix = 'M';
+    text = text.slice(0, -1);
+  }
+
+  // Handle commas
+  if (text.includes(',')) {
+    hasComma = true;
+    text = text.replace(/,/g, '');
+  }
+
+  target = parseFloat(text);
+  return { prefix, suffix, target, hasComma };
 }
 
-window.addEventListener('scroll', animateCounters);
+function formatNumber(num, hasComma) {
+  if (hasComma) {
+    return Math.round(num).toLocaleString('en-US');
+  }
+  if (Number.isInteger(num)) return num.toString();
+  return num.toString();
+}
+
+function animateCountUp(el, duration) {
+  const originalText = el.textContent;
+  const { prefix, suffix, target, hasComma } = parseStatValue(originalText);
+  if (isNaN(target)) return;
+
+  const startTime = performance.now();
+
+  function easeOutCubic(t) {
+    return 1 - Math.pow(1 - t, 3);
+  }
+
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const easedProgress = easeOutCubic(progress);
+    const current = easedProgress * target;
+
+    el.textContent = prefix + formatNumber(Math.round(current), hasComma) + suffix;
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      el.textContent = prefix + formatNumber(target, hasComma) + suffix;
+      el.closest('.stat-item').classList.add('counted');
+    }
+  }
+
+  el.textContent = prefix + '0' + suffix;
+  requestAnimationFrame(update);
+}
+
+// Observe all stat strips
+const statStripObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const numbers = entry.target.querySelectorAll('.stat-item .number');
+      numbers.forEach((num, i) => {
+        setTimeout(() => {
+          animateCountUp(num, 2000);
+        }, i * 200);
+      });
+      statStripObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.stat-strip-grid').forEach(grid => {
+  statStripObserver.observe(grid);
+});
+
+// ===== Animated Counter for Trust Stats (legacy) =====
+const trustStatObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const numbers = entry.target.querySelectorAll('.trust-stat .number');
+      numbers.forEach((num, i) => {
+        setTimeout(() => {
+          animateCountUp(num, 2000);
+        }, i * 200);
+      });
+      trustStatObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.trust-stats').forEach(grid => {
+  trustStatObserver.observe(grid);
+});
 
 // ===== FAQ Accordion =====
 document.querySelectorAll('.faq-question').forEach(btn => {
@@ -357,6 +442,22 @@ if (heroImg) {
   });
   heroImg.style.transform = 'scale(1.1)';
   heroImg.style.transition = 'transform 0.1s linear';
+}
+
+// ===== Parallax-like Scroll Effect on Split Section Images =====
+const splitImages = document.querySelectorAll('.split-image img');
+if (splitImages.length > 0) {
+  window.addEventListener('scroll', () => {
+    splitImages.forEach(img => {
+      const rect = img.parentElement.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      if (rect.top < windowHeight && rect.bottom > 0) {
+        const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
+        const offset = (progress - 0.5) * 30;
+        img.style.transform = `translateY(${offset}px) scale(1.03)`;
+      }
+    });
+  });
 }
 
 // ===== Animated Bar Charts =====

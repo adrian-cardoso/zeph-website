@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="page-transition">
 
@@ -28,12 +28,12 @@
         <ul class="nav-links" id="navLinks">
           <li><a href="index.html#how-it-works">How It Works</a></li>
           <li><a href="science.html">The Science</a></li>
-          <li><a href="product.html">Product</a></li>
+          <li><a href="patients.html">Patients</a></li>
           <li><a href="clinicians.html">For Clinicians</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="about.html">About</a></li>
         </ul>
         <div class="nav-cta">
-          <a href="index.html#contact" class="btn btn-primary">Order Zeph</a>
+          <a href="index.html#contact" class="btn btn-primary">Contact Us</a>
         </div>
         <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -56,12 +56,95 @@
     <section class="section">
       <div class="container">
         <div class="section-header">
-          <span class="section-label">Coming Soon</span>
-          <h2>We're Working on Something Great</h2>
-          <p>Our team is putting together expert articles on respiratory health, breathing techniques, product updates, and wellness tips. Check back soon for our first posts.</p>
+          <span class="section-label">Latest Articles</span>
+          <h2>Explore Our Blog</h2>
+          <p>Expert articles on respiratory health, breathing techniques, and wellness insights to help you breathe better every day.</p>
         </div>
-        <div style="text-align:center; margin-top:2rem;">
-          <a href="index.html#contact" class="btn btn-primary">Get Notified</a>
+
+        <div class="articles-grid">
+          <div class="article-card">
+            <div class="article-img">
+              <img src="images/doctor-consult.jpg" alt="Doctor consulting about lung capacity" loading="lazy">
+            </div>
+            <div class="article-body">
+              <span class="article-tag">Education</span>
+              <h3><a href="blog/understanding-lung-capacity.html">Understanding Your Lung Capacity: What the Numbers Mean</a></h3>
+              <p>Learn what lung function metrics like PEF, FVC, and FEV1 mean and how they impact your respiratory health.</p>
+              <span class="article-meta">February 5, 2026</span>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-img">
+              <img src="images/breathing-exercise.jpg" alt="Woman practicing breathing exercises" loading="lazy">
+            </div>
+            <div class="article-body">
+              <span class="article-tag">Practical Guide</span>
+              <h3><a href="blog/breathing-exercises.html">5 Breathing Exercises You Can Do Anywhere</a></h3>
+              <p>Simple, effective breathing exercises you can practice at home, at work, or on the go to improve your respiratory health.</p>
+              <span class="article-meta">January 28, 2026</span>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-img">
+              <img src="images/wellness-woman.jpg" alt="Woman practicing mindful breathing for mental health" loading="lazy">
+            </div>
+            <div class="article-body">
+              <span class="article-tag">Wellness</span>
+              <h3><a href="blog/breathing-and-mental-health.html">The Connection Between Breathing and Mental Health</a></h3>
+              <p>Discover how conscious breathing techniques can reduce anxiety, improve focus, and support emotional well-being.</p>
+              <span class="article-meta">January 20, 2026</span>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-img">
+              <img src="images/doctor-patient.jpg" alt="Doctor discussing COPD management with patient" loading="lazy">
+            </div>
+            <div class="article-body">
+              <span class="article-tag">COPD</span>
+              <h3><a href="blog/copd-daily-monitoring.html">COPD Management: How Daily Monitoring Changes Outcomes</a></h3>
+              <p>Why consistent respiratory monitoring is transforming how patients and clinicians manage chronic obstructive pulmonary disease.</p>
+              <span class="article-meta">January 12, 2026</span>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-img">
+              <img src="images/senior-active.jpg" alt="Active person training with breath exercises" loading="lazy">
+            </div>
+            <div class="article-body">
+              <span class="article-tag">Performance</span>
+              <h3><a href="blog/athletes-breath-training.html">How Athletes Use Breath Training to Boost Performance</a></h3>
+              <p>From elite runners to weekend warriors, learn how targeted breathing exercises can elevate athletic performance.</p>
+              <span class="article-meta">January 5, 2026</span>
+            </div>
+          </div>
+
+          <div class="article-card">
+            <div class="article-img">
+              <img src="images/happy-ladies.jpg" alt="Group enjoying clean outdoor air" loading="lazy">
+            </div>
+            <div class="article-body">
+              <span class="article-tag">Environment</span>
+              <h3><a href="blog/air-quality-respiratory-health.html">Air Quality and Respiratory Health: What You Need to Know</a></h3>
+              <p>Understanding how pollution, allergens, and indoor air quality affect your lungs and what you can do about it.</p>
+              <span class="article-meta">December 28, 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA Section ===== -->
+    <section class="cta-section">
+      <div class="container">
+        <h2>Ready to Breathe Better?</h2>
+        <p>Join thousands taking control of their respiratory health with Zeph.</p>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+          <a href="index.html#contact" class="btn btn-lime">Get in Touch</a>
+          <a href="index.html#how-it-works" class="btn btn-white">How It Works</a>
         </div>
       </div>
     </section>
@@ -87,6 +170,7 @@
           <ul class="footer-links">
             <li><a href="science.html">The Science</a></li>
             <li><a href="blog.html">Blog</a></li>
+            <li><a href="about.html">About</a></li>
             <li><a href="careers.html">Careers</a></li>
             <li><a href="index.html#contact">Contact</a></li>
           </ul>

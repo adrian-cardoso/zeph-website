@@ -21,9 +21,49 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://zeph.com/patients.html</loc>
+    <lastmod>2026-02-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://zeph.com/about.html</loc>
+    <lastmod>2026-02-12</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://zeph.com/blog.html</loc>
-    <lastmod>2026-02-11</lastmod>
+    <lastmod>2026-02-12</lastmod>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://zeph.com/blog/understanding-lung-capacity.html</loc>
+    <lastmod>2026-02-12</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://zeph.com/blog/breathing-exercises.html</loc>
+    <lastmod>2026-02-12</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://zeph.com/blog/breathing-and-mental-health.html</loc>
+    <lastmod>2026-02-12</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://zeph.com/blog/copd-daily-monitoring.html</loc>
+    <lastmod>2026-02-12</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://zeph.com/blog/athletes-breath-training.html</loc>
+    <lastmod>2026-02-12</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://zeph.com/blog/air-quality-respiratory-health.html</loc>
+    <lastmod>2026-02-12</lastmod>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://zeph.com/careers.html</loc>
