@@ -154,18 +154,29 @@ function animateCountUp(el, duration) {
 const statStripObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      const numbers = entry.target.querySelectorAll('.stat-item .number');
-      numbers.forEach((num, i) => {
+      const items = entry.target.querySelectorAll('.stat-item');
+      items.forEach((item, i) => {
+        // Fade in the stat item
         setTimeout(() => {
-          animateCountUp(num, 2000);
+          item.style.opacity = '1';
+          item.style.transform = 'translateY(0)';
+          // Then start the countUp on the number
+          const num = item.querySelector('.number');
+          if (num) animateCountUp(num, 2000);
         }, i * 200);
       });
       statStripObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.3 });
+}, { threshold: 0.2 });
 
 document.querySelectorAll('.stat-strip-grid').forEach(grid => {
+  // Set initial hidden state for stat items
+  Array.from(grid.querySelectorAll('.stat-item')).forEach(item => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(20px)';
+    item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  });
   statStripObserver.observe(grid);
 });
 
@@ -388,14 +399,7 @@ document.querySelectorAll('.steps-grid, .testimonials-grid, .partners-grid').for
   });
 });
 
-// Staggered stat items
-document.querySelectorAll('.stat-strip-grid').forEach(grid => {
-  Array.from(grid.children).forEach((child, i) => {
-    child.classList.add('reveal', 'reveal-up');
-    child.style.transitionDelay = `${i * 0.1}s`;
-    revealObserver.observe(child);
-  });
-});
+// Stat items: skip reveal observer (countUp handles their entrance animation)
 
 // Staggered grid children for sub-pages
 document.querySelectorAll('.features-grid, .articles-grid, .spec-grid, .team-grid, .chart-grid').forEach(grid => {
