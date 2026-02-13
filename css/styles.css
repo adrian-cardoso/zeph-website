@@ -159,6 +159,7 @@ p {
   padding: 0.875rem 2.5rem;
   font-size: 0.8125rem;
   font-weight: 700;
+  font-style: normal;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   border-radius: 50px;
@@ -261,9 +262,10 @@ p {
 }
 
 .nav-links a {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-dark);
   position: relative;
@@ -378,6 +380,7 @@ p {
   display: inline-block;
   font-size: 0.8125rem;
   font-weight: 700;
+  font-style: normal;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--lime);
@@ -438,6 +441,7 @@ p {
   display: inline-block;
   font-size: 0.75rem;
   font-weight: 700;
+  font-style: normal;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent);
@@ -597,6 +601,7 @@ p {
   display: inline-block;
   font-size: 0.75rem;
   font-weight: 700;
+  font-style: normal;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent);
