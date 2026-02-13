@@ -1106,6 +1106,24 @@ p {
   color: var(--primary);
 }
 
+/* ===== Video Section ===== */
+.video-section {
+  background: var(--bg-alt);
+}
+
+.video-player {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px -12px rgba(38, 82, 66, 0.2);
+}
+
+.video-player video {
+  width: 100%;
+  display: block;
+}
+
 /* ===== Partners ===== */
 .partners {
   padding: 3rem 0;
