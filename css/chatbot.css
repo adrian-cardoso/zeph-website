@@ -1,0 +1,483 @@
+/* ===== Zeph Chatbot Styles ===== */
+/* All classes prefixed with zeph-chat- to avoid collisions */
+
+/* --- Floating Button --- */
+.zeph-chat-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--lime);
+  border: none;
+  cursor: pointer;
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(38, 82, 66, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.zeph-chat-fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 24px rgba(38, 82, 66, 0.4);
+}
+
+.zeph-chat-fab:focus-visible {
+  outline: 3px solid var(--lime);
+  outline-offset: 3px;
+}
+
+.zeph-chat-fab svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.zeph-chat-fab[aria-expanded="true"] svg {
+  transform: rotate(90deg);
+}
+
+/* --- Chat Window --- */
+.zeph-chat-window {
+  position: fixed;
+  bottom: 96px;
+  right: 24px;
+  width: 380px;
+  max-height: 560px;
+  background: var(--bg-cream);
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  z-index: 5001;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px) scale(0.96);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.zeph-chat-window.zeph-chat-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* --- Header --- */
+.zeph-chat-header {
+  background: var(--primary);
+  color: var(--text-cream);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.zeph-chat-header-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.zeph-chat-header-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--lime);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.zeph-chat-header-status {
+  font-size: 0.7rem;
+  opacity: 0.8;
+  font-weight: 400;
+  margin-top: 1px;
+}
+
+.zeph-chat-close {
+  background: none;
+  border: none;
+  color: var(--text-cream);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.zeph-chat-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.zeph-chat-close:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 2px;
+}
+
+.zeph-chat-close svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* --- Messages Area --- */
+.zeph-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 200px;
+  max-height: 360px;
+  scroll-behavior: smooth;
+}
+
+.zeph-chat-messages::-webkit-scrollbar {
+  width: 5px;
+}
+
+.zeph-chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.zeph-chat-messages::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+/* --- Message Bubbles --- */
+.zeph-chat-msg {
+  display: flex;
+  gap: 8px;
+  max-width: 88%;
+  animation: zeph-chat-fadeIn 0.3s ease;
+}
+
+.zeph-chat-msg-bot {
+  align-self: flex-start;
+}
+
+.zeph-chat-msg-user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.zeph-chat-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--lime);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.zeph-chat-bubble {
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.zeph-chat-msg-bot .zeph-chat-bubble {
+  background: #fff;
+  color: var(--text-dark);
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.zeph-chat-msg-user .zeph-chat-bubble {
+  background: var(--primary);
+  color: var(--text-cream);
+  border-bottom-right-radius: 4px;
+}
+
+.zeph-chat-bubble a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.zeph-chat-msg-user .zeph-chat-bubble a {
+  color: var(--lime);
+}
+
+.zeph-chat-bubble strong {
+  font-weight: 600;
+}
+
+/* --- Typing Indicator --- */
+.zeph-chat-typing {
+  display: flex;
+  gap: 8px;
+  align-self: flex-start;
+  max-width: 88%;
+}
+
+.zeph-chat-typing-dots {
+  background: #fff;
+  padding: 12px 16px;
+  border-radius: 16px;
+  border-bottom-left-radius: 4px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.zeph-chat-typing-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-light);
+  animation: zeph-chat-bounce 1.4s ease-in-out infinite;
+}
+
+.zeph-chat-typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.zeph-chat-typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* --- Quick Replies --- */
+.zeph-chat-quick-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 16px 12px;
+  animation: zeph-chat-fadeIn 0.3s ease;
+}
+
+.zeph-chat-quick-btn {
+  padding: 6px 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+
+.zeph-chat-quick-btn:hover {
+  background: var(--primary);
+  color: var(--text-cream);
+}
+
+.zeph-chat-quick-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* --- Input Area --- */
+.zeph-chat-input-area {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+  background: var(--bg-cream);
+}
+
+.zeph-chat-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  background: #fff;
+  color: var(--text-dark);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.zeph-chat-input:focus {
+  border-color: var(--primary);
+}
+
+.zeph-chat-input::placeholder {
+  color: var(--text-light);
+}
+
+.zeph-chat-send {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--lime);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.zeph-chat-send:hover {
+  background: var(--primary-dark);
+  transform: scale(1.05);
+}
+
+.zeph-chat-send:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.zeph-chat-send svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* --- Animations --- */
+@keyframes zeph-chat-fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zeph-chat-bounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-6px);
+  }
+}
+
+/* --- Dark Mode --- */
+[data-theme="dark"] .zeph-chat-fab {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .zeph-chat-window {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .zeph-chat-msg-bot .zeph-chat-bubble {
+  background: #2a2a2a;
+  color: #f0efe8;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .zeph-chat-typing-dots {
+  background: #2a2a2a;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .zeph-chat-typing-dot {
+  background: #666;
+}
+
+[data-theme="dark"] .zeph-chat-input {
+  background: #2a2a2a;
+  color: #f0efe8;
+  border-color: #444;
+}
+
+[data-theme="dark"] .zeph-chat-input::placeholder {
+  color: #888;
+}
+
+[data-theme="dark"] .zeph-chat-input:focus {
+  border-color: var(--lime);
+}
+
+[data-theme="dark"] .zeph-chat-quick-btn {
+  color: var(--lime);
+  border-color: var(--lime);
+}
+
+[data-theme="dark"] .zeph-chat-quick-btn:hover {
+  background: var(--lime);
+  color: var(--primary);
+}
+
+[data-theme="dark"] .zeph-chat-bubble a {
+  color: var(--lime);
+}
+
+/* --- Responsive --- */
+@media (max-width: 480px) {
+  .zeph-chat-fab {
+    bottom: 16px;
+    right: 16px;
+    width: 54px;
+    height: 54px;
+  }
+
+  .zeph-chat-fab svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .zeph-chat-window {
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    max-height: 100vh;
+    max-height: 100dvh;
+    border-radius: 0;
+  }
+
+  .zeph-chat-messages {
+    max-height: calc(100vh - 160px);
+    max-height: calc(100dvh - 160px);
+  }
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .zeph-chat-fab,
+  .zeph-chat-window,
+  .zeph-chat-msg,
+  .zeph-chat-quick-replies {
+    transition: none;
+    animation: none;
+  }
+
+  .zeph-chat-typing-dot {
+    animation: none;
+    opacity: 0.6;
+  }
+
+  .zeph-chat-fab svg {
+    transition: none;
+  }
+}
