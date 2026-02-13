@@ -676,6 +676,18 @@ p {
   margin: 0;
 }
 
+.section-dark .step-card {
+  color: var(--text-dark);
+}
+
+.section-dark .step-card h3 {
+  color: var(--text-dark);
+}
+
+.section-dark .step-card p {
+  color: var(--text-light);
+}
+
 /* ===== Image Mosaic ===== */
 .mosaic {
   display: grid;
