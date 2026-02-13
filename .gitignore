@@ -1,4 +1,21 @@
 .vercel
 .DS_Store
+Thumbs.db
 images/zeph-video.mp4
 images/brand-015.ppm
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env*.local
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
