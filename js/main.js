@@ -150,44 +150,28 @@ function animateCountUp(el, duration) {
   requestAnimationFrame(update);
 }
 
-// Observe all stat strips
-function animateStatGrid(grid) {
-  if (grid.dataset.animated) return;
-  grid.dataset.animated = 'true';
-  const items = grid.querySelectorAll('.stat-item');
-  items.forEach((item, i) => {
-    setTimeout(() => {
-      item.style.opacity = '1';
-      item.style.transform = 'translateY(0)';
-      const num = item.querySelector('.number');
-      if (num) animateCountUp(num, 2000);
-    }, i * 200);
+// Observe all stat strips — use scroll listener for maximum reliability
+const statGrids = document.querySelectorAll('.stat-strip-grid');
+
+function checkStatStrips() {
+  statGrids.forEach(grid => {
+    if (grid.dataset.animated) return;
+    const rect = grid.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      grid.dataset.animated = 'true';
+      const numbers = grid.querySelectorAll('.stat-item .number');
+      numbers.forEach((num, i) => {
+        setTimeout(() => {
+          animateCountUp(num, 2000);
+        }, i * 200);
+      });
+    }
   });
 }
 
-const statStripObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      animateStatGrid(entry.target);
-      statStripObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0, rootMargin: '0px 0px 50px 0px' });
-
-document.querySelectorAll('.stat-strip-grid').forEach(grid => {
-  Array.from(grid.querySelectorAll('.stat-item')).forEach(item => {
-    item.style.opacity = '0';
-    item.style.transform = 'translateY(20px)';
-    item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-  });
-  statStripObserver.observe(grid);
-
-  // Fallback: if already in viewport, animate immediately
-  const rect = grid.getBoundingClientRect();
-  if (rect.top < window.innerHeight && rect.bottom > 0) {
-    setTimeout(() => animateStatGrid(grid), 300);
-  }
-});
+window.addEventListener('scroll', checkStatStrips, { passive: true });
+window.addEventListener('load', checkStatStrips);
+setTimeout(checkStatStrips, 500);
 
 // ===== Animated Counter for Trust Stats (legacy) =====
 const trustStatObserver = new IntersectionObserver((entries) => {
