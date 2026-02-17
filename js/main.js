@@ -414,6 +414,12 @@ document.querySelectorAll('.science-list').forEach(list => {
   });
 });
 
+// Animated steps container
+document.querySelectorAll('.animated-steps').forEach(el => {
+  el.classList.add('reveal', 'reveal-up');
+  revealObserver.observe(el);
+});
+
 // Product hero
 document.querySelectorAll('.product-visual, .product-info').forEach(el => {
   if (!el.classList.contains('reveal')) {
@@ -478,6 +484,32 @@ const barObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.bar-chart').forEach(chart => {
   barObserver.observe(chart);
 });
+
+// ===== Animated Steps (scroll-triggered) =====
+const animatedSteps = document.querySelectorAll('.animated-step');
+
+if (animatedSteps.length > 0) {
+  const stepImages = document.querySelectorAll('.animated-step-image');
+
+  const stepObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const stepNum = entry.target.dataset.step;
+
+        // Update text steps
+        animatedSteps.forEach(s => s.classList.remove('active'));
+        entry.target.classList.add('active');
+
+        // Update images
+        stepImages.forEach(img => {
+          img.classList.toggle('active', img.dataset.step === stepNum);
+        });
+      }
+    });
+  }, { threshold: 0.5, rootMargin: '-10% 0px -40% 0px' });
+
+  animatedSteps.forEach(step => stepObserver.observe(step));
+}
 
 // ===== Keyboard Accessibility =====
 document.addEventListener('keydown', (e) => {
