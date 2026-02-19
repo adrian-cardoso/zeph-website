@@ -1340,6 +1340,15 @@ p {
   background: #265242;
   color: #fff;
   padding: 4rem 0;
+  text-align: center;
+}
+
+.pulmonary-rehab-stats .stat-strip-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.pulmonary-rehab-stats .stat-item .number {
+  white-space: nowrap;
 }
 
 .pulmonary-rehab-stats .section-header h2 {
