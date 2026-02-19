@@ -1167,7 +1167,7 @@ p {
 
 /* ===== Partners ===== */
 .partners {
-  padding: 3rem 0;
+  padding: 3rem 0 1.5rem;
   border-top: 1px solid var(--border);
 }
 
