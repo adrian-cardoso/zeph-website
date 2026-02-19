@@ -192,6 +192,40 @@ document.querySelectorAll('.trust-stats').forEach(grid => {
   trustStatObserver.observe(grid);
 });
 
+// ===== FAQ Tab Switching =====
+const faqTabs = document.querySelectorAll('.faq-tab');
+const faqLists = document.querySelectorAll('.faq-list');
+
+if (faqTabs.length > 0) {
+  faqTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Remove active class from all tabs
+      faqTabs.forEach(t => t.classList.remove('active'));
+
+      // Add active class to clicked tab
+      tab.classList.add('active');
+
+      // Hide all FAQ lists
+      faqLists.forEach(list => {
+        list.style.display = 'none';
+      });
+
+      // Show the matching FAQ list
+      const targetId = 'faq-' + tab.getAttribute('data-tab');
+      const targetList = document.getElementById(targetId);
+      if (targetList) {
+        targetList.style.display = 'block';
+      }
+
+      // Close any open accordion items when switching tabs
+      document.querySelectorAll('.faq-item').forEach(faq => {
+        faq.classList.remove('active');
+        faq.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+    });
+  });
+}
+
 // ===== FAQ Accordion =====
 document.querySelectorAll('.faq-question').forEach(btn => {
   btn.setAttribute('aria-expanded', 'false');

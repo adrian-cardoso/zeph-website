@@ -577,6 +577,10 @@ p {
   color: white;
 }
 
+.section-gradient {
+  background: linear-gradient(180deg, #f7f5f0 0%, #e8e4db 100%);
+}
+
 .section-dark h2,
 .section-dark h3,
 .section-dark h4 {
@@ -638,11 +642,31 @@ p {
 }
 
 .step-card-image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
   height: 240px;
   overflow: hidden;
 }
 
+.step-card-image::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  height: 85%;
+  background: #f0f5f2;
+  border-radius: 1.5rem;
+  z-index: 0;
+}
+
 .step-card-image img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1158,41 +1182,41 @@ p {
   font-family: 'Neue Haas Grotesk', sans-serif;
 }
 
-.partners-grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem 2rem;
-  flex-wrap: nowrap;
-}
-
-.partners-grid .partner-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.partners-grid .partner-logo img {
-  height: auto;
+.partners-marquee {
+  overflow: hidden;
   width: 100%;
-  max-height: 320px;
+}
+
+.partners-track {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+
+.partners-track .partner-logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.partners-track .partner-logo img {
+  height: 80px;
+  width: auto;
   object-fit: contain;
   filter: none;
   opacity: 1;
-  transition: opacity 0.3s ease;
 }
 
-.partners-grid .partner-logo {
-  flex: 1 1 0;
-  min-width: 0;
-}
-
-.partners-grid .partner-logo:hover img {
-  opacity: 0.8;
-}
-
-.partners-grid .partner-logo--invert img {
+.partners-track .partner-logo--invert img {
   filter: invert(1);
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 
@@ -1309,6 +1333,58 @@ p {
 
 .section-dark .faq-answer-inner {
   color: rgba(255, 255, 255, 0.8);
+}
+
+/* ===== Pulmonary Rehab Stats ===== */
+.pulmonary-rehab-stats {
+  background: #265242;
+  color: #fff;
+  padding: 4rem 0;
+}
+
+.pulmonary-rehab-stats .section-header h2 {
+  color: #fff;
+}
+
+.pulmonary-rehab-stats .section-header p {
+  color: rgba(255,255,255,0.8);
+}
+
+.pulmonary-rehab-stats .stat-item .number {
+  color: #D4E157;
+}
+
+.pulmonary-rehab-stats .stat-item .label {
+  color: rgba(255,255,255,0.8);
+}
+
+/* ===== FAQ Tabs ===== */
+.faq-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 2rem;
+}
+
+.faq-tab {
+  background: none;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-light);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  font-family: 'Neue Haas Grotesk', 'Inter', sans-serif;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.faq-tab.active {
+  color: #265242;
+  border-bottom-color: #265242;
+}
+
+.faq-tab:hover {
+  color: #265242;
 }
 
 /* ===== Page Header (Inner Pages) ===== */
@@ -2338,14 +2414,6 @@ p {
     font-size: 2.5rem;
   }
 
-  .partners-grid {
-    gap: 1rem 1.5rem;
-  }
-
-  .partners-grid .partner-logo img {
-    height: 90px;
-  }
-
   .form-row {
     grid-template-columns: 1fr;
   }
@@ -2457,14 +2525,6 @@ p {
 
   .full-bleed-content {
     padding: 0 1.5rem;
-  }
-
-  .partners-grid {
-    gap: 0.75rem 1rem;
-  }
-
-  .partners-grid .partner-logo img {
-    height: 70px;
   }
 
   .testimonial-card {
