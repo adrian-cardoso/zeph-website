@@ -1207,12 +1207,23 @@ p {
   height: 80px;
   width: auto;
   object-fit: contain;
-  filter: none;
+  filter: grayscale(100%);
+  opacity: 0.5;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.partners-track .partner-logo:hover img {
+  filter: grayscale(0%);
   opacity: 1;
 }
 
 .partners-track .partner-logo--invert img {
+  filter: grayscale(100%) invert(1);
+}
+
+.partners-track .partner-logo--invert:hover img {
   filter: invert(1);
+  opacity: 1;
 }
 
 @keyframes marquee {
