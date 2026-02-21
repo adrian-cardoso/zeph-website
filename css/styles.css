@@ -1183,27 +1183,22 @@ p {
   font-family: 'Neue Haas Grotesk', sans-serif;
 }
 
-.partners-marquee {
-  overflow: hidden;
-  width: 100%;
-}
-
-.partners-track {
+.partners-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 3rem;
-  animation: marquee 30s linear infinite;
-  width: max-content;
+  flex-wrap: wrap;
 }
 
-.partners-track .partner-logo {
+.partners-row .partner-logo {
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.partners-track .partner-logo img {
+.partners-row .partner-logo img {
   height: 80px;
   width: auto;
   object-fit: contain;
@@ -1212,23 +1207,18 @@ p {
   transition: filter 0.3s ease, opacity 0.3s ease;
 }
 
-.partners-track .partner-logo:hover img {
+.partners-row .partner-logo:hover img {
   filter: grayscale(0%);
   opacity: 1;
 }
 
-.partners-track .partner-logo--invert img {
+.partners-row .partner-logo--invert img {
   filter: grayscale(100%) invert(1);
 }
 
-.partners-track .partner-logo--invert:hover img {
+.partners-row .partner-logo--invert:hover img {
   filter: invert(1);
   opacity: 1;
-}
-
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
 }
 
 
