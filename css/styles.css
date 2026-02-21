@@ -2493,6 +2493,15 @@ p {
   .comparison-table td {
     padding: 0.75rem 0.5rem;
   }
+
+  .partners-row {
+    gap: 2rem;
+  }
+
+  .partners-row .partner-logo img {
+    height: 50px;
+    max-width: 140px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2563,5 +2572,14 @@ p {
 
   .cta-section h2 {
     font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .partners-row {
+    gap: 1.5rem;
+  }
+
+  .partners-row .partner-logo img {
+    height: 40px;
+    max-width: 120px;
   }
 }
