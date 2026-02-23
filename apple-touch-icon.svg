@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
   <rect width="180" height="180" rx="40" fill="#265242"/>
-  <text x="90" y="120" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="110" font-weight="700" fill="#D6FF33">z</text>
+  <path d="M68 39 L141 39 L141 87 C101 87 68 62 68 39Z" fill="#D6FF33"/>
+  <path d="M113 141 L39 141 L39 93 C79 93 113 118 113 141Z" fill="#D6FF33"/>
 </svg>
