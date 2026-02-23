@@ -1622,6 +1622,114 @@ p {
   color: var(--text-light);
 }
 
+/* ===== Outcomes Grid (ring charts) ===== */
+.outcomes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.outcome-card {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: white;
+  transition: var(--transition);
+}
+
+.outcome-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.outcome-card h3 {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+}
+
+.outcome-card p {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.ring-chart {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: conic-gradient(var(--ring-color) calc(var(--percent) * 1%), #e8ede9 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+  position: relative;
+}
+
+.ring-chart::before {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: white;
+}
+
+.ring-value {
+  position: relative;
+  z-index: 1;
+  font-family: 'Inter', 'Neue Haas Grotesk', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* ===== Facts Grid ===== */
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.fact-card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.fact-number {
+  font-family: 'Inter', 'Neue Haas Grotesk', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--lime);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.fact-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--lime);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.fact-card p {
+  font-size: 0.9375rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.6;
+  margin: 0;
+}
+
 /* ===== Clinical Data / Charts ===== */
 .chart-grid {
   display: grid;
@@ -2349,6 +2457,14 @@ p {
     grid-template-columns: 1fr;
   }
 
+  .outcomes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .facts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .team-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2556,6 +2672,32 @@ p {
 
   .section-header p {
     font-size: 0.9375rem;
+  }
+
+  .outcomes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ring-chart {
+    width: 120px;
+    height: 120px;
+  }
+
+  .ring-chart::before {
+    width: 84px;
+    height: 84px;
+  }
+
+  .ring-value {
+    font-size: 1.5rem;
+  }
+
+  .fact-number {
+    font-size: 2.5rem;
   }
 
   .split-image {
