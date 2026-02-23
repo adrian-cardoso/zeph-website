@@ -540,7 +540,7 @@ if (animatedSteps.length > 0) {
         });
       }
     });
-  }, { threshold: 0.5, rootMargin: '-10% 0px -40% 0px' });
+  }, { threshold: 0.3, rootMargin: '-20% 0px -20% 0px' });
 
   animatedSteps.forEach(step => stepObserver.observe(step));
 }
