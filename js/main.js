@@ -448,8 +448,9 @@ document.querySelectorAll('.science-list').forEach(list => {
   });
 });
 
-// Animated steps container
-document.querySelectorAll('.animated-steps').forEach(el => {
+// Animated steps: only reveal the content column (not the grid container,
+// because a transform on the grid breaks position:sticky in the visual column)
+document.querySelectorAll('.animated-steps-content').forEach(el => {
   el.classList.add('reveal', 'reveal-up');
   revealObserver.observe(el);
 });
@@ -524,25 +525,35 @@ const animatedSteps = document.querySelectorAll('.animated-step');
 
 if (animatedSteps.length > 0) {
   const stepImages = document.querySelectorAll('.animated-step-image');
+  let currentStep = '1';
 
-  const stepObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const stepNum = entry.target.dataset.step;
+  function updateActiveStep() {
+    const viewportCenter = window.innerHeight / 2;
+    let closestStep = null;
+    let closestDist = Infinity;
 
-        // Update text steps
-        animatedSteps.forEach(s => s.classList.remove('active'));
-        entry.target.classList.add('active');
-
-        // Update images
-        stepImages.forEach(img => {
-          img.classList.toggle('active', img.dataset.step === stepNum);
-        });
+    animatedSteps.forEach(step => {
+      const rect = step.getBoundingClientRect();
+      const stepCenter = rect.top + rect.height / 2;
+      const dist = Math.abs(stepCenter - viewportCenter);
+      if (dist < closestDist) {
+        closestDist = dist;
+        closestStep = step;
       }
     });
-  }, { threshold: 0.1, rootMargin: '-40% 0px -40% 0px' });
 
-  animatedSteps.forEach(step => stepObserver.observe(step));
+    if (closestStep && closestStep.dataset.step !== currentStep) {
+      currentStep = closestStep.dataset.step;
+      animatedSteps.forEach(s => s.classList.remove('active'));
+      closestStep.classList.add('active');
+      stepImages.forEach(img => {
+        img.classList.toggle('active', img.dataset.step === currentStep);
+      });
+    }
+  }
+
+  window.addEventListener('scroll', updateActiveStep, { passive: true });
+  updateActiveStep();
 }
 
 // ===== Keyboard Accessibility =====
