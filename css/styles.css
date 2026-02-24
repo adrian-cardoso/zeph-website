@@ -1207,8 +1207,8 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 140px;
-  height: 44px;
+  width: 220px;
+  height: 36px;
 }
 
 .partners-track .partner-logo img {
@@ -1626,7 +1626,6 @@ p {
 
 /* ===== Editorial Layout ===== */
 .editorial-intro {
-  max-width: 960px;
   margin: 0 auto;
   text-align: center;
 }
@@ -2767,8 +2766,8 @@ p {
   }
 
   .partners-track .partner-logo {
-    width: 120px;
-    height: 36px;
+    width: 160px;
+    height: 30px;
   }
 }
 
@@ -2894,7 +2893,7 @@ p {
   }
 
   .partners-track .partner-logo {
-    width: 100px;
-    height: 30px;
+    width: 140px;
+    height: 26px;
   }
 }
