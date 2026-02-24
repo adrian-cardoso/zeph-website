@@ -1166,7 +1166,7 @@ p {
 
 /* ===== Partners ===== */
 .partners {
-  padding: 3rem 0;
+  padding: 2rem 0;
   border-top: 1px solid var(--border);
 }
 
@@ -1177,7 +1177,7 @@ p {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--text-light);
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
   font-family: 'Neue Haas Grotesk', sans-serif;
 }
 
@@ -1623,7 +1623,7 @@ p {
 
 /* ===== Editorial Layout ===== */
 .editorial-intro {
-  max-width: 720px;
+  max-width: 800px;
   margin: 0 auto;
   text-align: center;
 }
