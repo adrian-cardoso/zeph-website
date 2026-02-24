@@ -1622,6 +1622,79 @@ p {
   color: var(--text-light);
 }
 
+/* ===== Editorial Layout ===== */
+.editorial-intro {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.editorial-intro h2 {
+  margin-bottom: 1.25rem;
+}
+
+.editorial-intro p {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--text-light);
+}
+
+.editorial-benefits {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.editorial-benefit {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 3rem;
+}
+
+.editorial-benefit:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.editorial-benefit h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.editorial-benefit p {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--text-light);
+  margin: 0;
+}
+
+.editorial-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+.editorial-stat {
+  text-align: center;
+}
+
+.editorial-stat-number {
+  font-family: 'Inter', 'Neue Haas Grotesk', sans-serif;
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: var(--lime);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.editorial-stat p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin: 0;
+}
+
 /* ===== Benefits Grid ===== */
 .benefits-grid {
   display: grid;
@@ -2482,6 +2555,14 @@ p {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .editorial-stats {
+    gap: 2rem;
+  }
+
+  .editorial-stat-number {
+    font-size: 3.5rem;
+  }
+
   .footer-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2713,6 +2794,23 @@ p {
   .stat-strip-grid {
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem 1rem;
+  }
+
+  .editorial-stats {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .editorial-stat-number {
+    font-size: 3rem;
+  }
+
+  .editorial-benefits {
+    gap: 2rem;
+  }
+
+  .editorial-benefit {
+    padding-bottom: 2rem;
   }
 
   .section {
