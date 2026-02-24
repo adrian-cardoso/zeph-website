@@ -1207,8 +1207,8 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 220px;
-  height: 36px;
+  width: 150px;
+  height: 40px;
 }
 
 .partners-track .partner-logo img {
@@ -2766,8 +2766,8 @@ p {
   }
 
   .partners-track .partner-logo {
-    width: 160px;
-    height: 30px;
+    width: 120px;
+    height: 32px;
   }
 }
 
@@ -2893,7 +2893,7 @@ p {
   }
 
   .partners-track .partner-logo {
-    width: 140px;
-    height: 26px;
+    width: 100px;
+    height: 28px;
   }
 }
