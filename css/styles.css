@@ -1207,12 +1207,15 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 140px;
+  height: 44px;
 }
 
 .partners-track .partner-logo img {
-  height: 44px;
-  max-width: 160px;
+  max-height: 100%;
+  max-width: 100%;
   width: auto;
+  height: auto;
   object-fit: contain;
   filter: grayscale(100%);
   opacity: 0.5;
@@ -1623,7 +1626,7 @@ p {
 
 /* ===== Editorial Layout ===== */
 .editorial-intro {
-  max-width: 800px;
+  max-width: 960px;
   margin: 0 auto;
   text-align: center;
 }
@@ -2763,9 +2766,9 @@ p {
     gap: 2rem;
   }
 
-  .partners-track .partner-logo img {
+  .partners-track .partner-logo {
+    width: 120px;
     height: 36px;
-    max-width: 130px;
   }
 }
 
@@ -2890,8 +2893,8 @@ p {
     gap: 1.5rem;
   }
 
-  .partners-track .partner-logo img {
+  .partners-track .partner-logo {
+    width: 100px;
     height: 30px;
-    max-width: 100px;
   }
 }
