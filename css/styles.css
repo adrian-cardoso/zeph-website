@@ -543,7 +543,7 @@ p {
 
 .stat-strip-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
 
@@ -639,6 +639,8 @@ p {
   background: white;
   border: 1px solid var(--border);
   transition: var(--transition);
+  display: flex;
+  flex-direction: column;
 }
 
 .step-card:hover {
@@ -666,6 +668,7 @@ p {
 
 .step-card-body {
   padding: 2rem;
+  flex: 1;
 }
 
 .step-number {
@@ -1156,6 +1159,8 @@ p {
 .video-player video {
   width: 100%;
   display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
 
 /* ===== Partners ===== */
@@ -1794,6 +1799,84 @@ p {
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--text-dark);
+}
+
+/* Ring chart variation: solid filled circle (no cutout) */
+.ring-chart--solid::before {
+  display: none;
+}
+.ring-chart--solid .ring-value {
+  color: white;
+}
+
+/* Ring chart variation: thicker ring with filled background */
+.ring-chart--filled::before {
+  width: 80px;
+  height: 80px;
+}
+
+/* ===== Attendance Comparison ===== */
+.attendance-comparison {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+.attendance-bar-group {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3rem;
+  height: 300px;
+  margin-bottom: 1.5rem;
+}
+.attendance-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 120px;
+}
+.attendance-bar {
+  width: 100%;
+  height: var(--bar-height);
+  border-radius: 0.5rem 0.5rem 0 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 0.75rem;
+  min-height: 40px;
+}
+.attendance-item--zeph .attendance-bar {
+  background: var(--primary);
+}
+.attendance-item--industry .attendance-bar {
+  background: var(--text-light);
+  padding-top: 0;
+  position: relative;
+}
+.attendance-item--industry .attendance-value {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text-dark);
+  margin-bottom: 0.25rem;
+}
+.attendance-value {
+  font-family: 'Inter', 'Neue Haas Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+}
+.attendance-label {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+.attendance-caption {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  margin-top: 1rem;
 }
 
 /* ===== Facts Grid ===== */
@@ -2831,6 +2914,11 @@ p {
   .ring-chart::before {
     width: 84px;
     height: 84px;
+  }
+
+  .ring-chart--filled::before {
+    width: 64px;
+    height: 64px;
   }
 
   .ring-value {
