@@ -1175,8 +1175,10 @@ p {
 }
 
 .partners-marquee {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
   width: 100%;
+  padding: 10px 0;
 }
 
 .partners-marquee:hover .partners-track {
