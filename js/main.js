@@ -325,7 +325,8 @@ function validateForm(form) {
 
 // Clear error on input
 document.querySelectorAll('.form-group input, .form-group textarea, .form-group select').forEach(field => {
-  field.addEventListener('input', () => {
+  const eventType = field.tagName === 'SELECT' ? 'change' : 'input';
+  field.addEventListener(eventType, () => {
     const group = field.closest('.form-group');
     if (group) group.classList.remove('error');
   });
