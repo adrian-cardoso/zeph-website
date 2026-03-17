@@ -1853,6 +1853,7 @@ p {
   background: var(--text-light);
   padding-top: 0;
   position: relative;
+  min-height: 12px;
 }
 .attendance-item--industry .attendance-value {
   position: absolute;
