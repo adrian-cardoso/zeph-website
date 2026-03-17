@@ -101,7 +101,7 @@
             <p>Patients rate Zeph as exceptional for satisfaction and trust</p>
           </div>
           <div class="outcome-card">
-            <div class="ring-chart" style="--percent: 96; --ring-color: var(--primary)">
+            <div class="ring-chart ring-chart--filled" style="--percent: 96; --ring-color: var(--primary)">
               <span class="ring-value">96%</span>
             </div>
             <h3>Would Recommend</h3>
@@ -155,29 +155,25 @@
     </section>
 
     <!-- ===== Attendance Comparison ===== -->
-    <section class="section">
+    <section class="section section-dark" style="padding: 5rem 0;">
       <div class="container">
-        <div class="section-header">
-          <span class="section-label">Clinical Data</span>
-          <h2>Industry-Leading Attendance</h2>
-          <p>Zeph drives patient engagement far beyond the industry standard.</p>
-        </div>
-        <div class="attendance-comparison">
-          <div class="attendance-bar-group">
-            <div class="attendance-item attendance-item--zeph">
-              <div class="attendance-bar" style="--bar-height: 81%">
-                <span class="attendance-value">81%</span>
-              </div>
-              <span class="attendance-label">Zeph Attendance</span>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+          <div>
+            <span class="section-label" style="color: var(--lime);">Results</span>
+            <h2 style="color: #fff; font-size: 2.25rem; line-height: 1.2;">Industry-leading attendance</h2>
+          </div>
+          <div style="display: flex; gap: 2rem; justify-content: center; align-items: flex-end;">
+            <div style="text-align: center;">
+              <div style="font-size: 2.75rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;">81%</div>
+              <div style="background: var(--lime); width: 140px; height: 200px; border-radius: 0.5rem 0.5rem 0 0;"></div>
+              <div style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-top: 0.75rem; line-height: 1.4;">Zeph session<br>attendance</div>
             </div>
-            <div class="attendance-item attendance-item--industry">
-              <div class="attendance-bar" style="--bar-height: 3%">
-                <span class="attendance-value">3%</span>
-              </div>
-              <span class="attendance-label">Industry Standard</span>
+            <div style="text-align: center;">
+              <div style="font-size: 2.75rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem;">3%</div>
+              <div style="background: rgba(255,255,255,0.25); width: 140px; height: 8px; border-radius: 0.5rem 0.5rem 0 0;"></div>
+              <div style="font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-top: 0.75rem; line-height: 1.4;">Industry standard<br>attendance</div>
             </div>
           </div>
-          <p class="attendance-caption">Pulmonary rehabilitation attendance rate: Zeph vs. industry average</p>
         </div>
       </div>
     </section>
