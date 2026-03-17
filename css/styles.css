@@ -1628,12 +1628,13 @@ p {
 }
 
 .editorial-intro h2 {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .editorial-intro p {
-  font-size: 1.125rem;
-  line-height: 1.8;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
   color: var(--text-light);
 }
 
