@@ -1371,6 +1371,7 @@ p {
 
 .pulmonary-rehab-stats .section-header p {
   color: rgba(255,255,255,0.8);
+  max-width: none;
 }
 
 .pulmonary-rehab-stats .stat-item .number {
