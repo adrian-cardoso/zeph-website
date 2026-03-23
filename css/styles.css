@@ -2599,7 +2599,7 @@ p {
 }
 
 /* ===== Responsive Design ===== */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .split {
     grid-template-columns: 1fr;
     min-height: auto;
