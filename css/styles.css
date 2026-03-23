@@ -1781,6 +1781,26 @@ p {
   color: var(--accent);
 }
 
+.outcome-card--custom {
+  padding: 2rem 1.5rem;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot--improved {
+  background: var(--lime);
+}
+
+.dot--baseline {
+  background: var(--accent);
+  opacity: 0.35;
+}
+
 .ring-chart {
   width: 140px;
   height: 140px;
