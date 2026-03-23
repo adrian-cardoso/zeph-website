@@ -2700,13 +2700,6 @@ p {
     padding: 2rem 0;
   }
 
-  .animated-steps-sticky {
-    position: relative;
-    top: 0;
-  }
-}
-
-@media (max-width: 768px) {
   .mobile-toggle {
     display: flex;
   }
@@ -2740,6 +2733,13 @@ p {
     box-shadow: var(--shadow-lg);
   }
 
+  .animated-steps-sticky {
+    position: relative;
+    top: 0;
+  }
+}
+
+@media (max-width: 768px) {
   .hero-content {
     padding: 10rem 0 4rem;
   }
