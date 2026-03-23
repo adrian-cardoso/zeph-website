@@ -1773,6 +1773,14 @@ p {
   margin: 0;
 }
 
+.outcome-card-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
 .ring-chart {
   width: 140px;
   height: 140px;
