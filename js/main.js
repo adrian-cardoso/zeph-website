@@ -89,9 +89,21 @@ function parseStatValue(text) {
     text = text.substring(1);
   }
 
+  // Handle $ prefix
+  if (text.startsWith('$')) {
+    prefix += '$';
+    text = text.substring(1);
+  }
+
   // Handle % suffix
   if (text.endsWith('%')) {
     suffix = '%';
+    text = text.slice(0, -1);
+  }
+
+  // Handle B suffix
+  if (text.endsWith('B')) {
+    suffix = 'B';
     text = text.slice(0, -1);
   }
 
