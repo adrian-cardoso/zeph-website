@@ -2369,6 +2369,11 @@ a.article-card--link {
 .article-content ol {
   margin-bottom: 1.25rem;
   padding-left: 1.5rem;
+  list-style: disc;
+}
+
+.article-content ol {
+  list-style: decimal;
 }
 
 .article-content li {
