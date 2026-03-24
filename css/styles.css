@@ -1181,7 +1181,7 @@ p {
 .partners-track {
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 4.5rem;
   width: max-content;
   animation: marquee 30s linear infinite;
 }
@@ -1199,7 +1199,7 @@ p {
 }
 
 .partners-track .partner-logo img {
-  height: 56px;
+  height: 40px;
   width: auto;
   object-fit: contain;
   filter: grayscale(100%);
@@ -2937,7 +2937,7 @@ a.article-card--link {
   }
 
   .partners-track .partner-logo img {
-    height: 44px;
+    height: 32px;
   }
 }
 
@@ -3068,6 +3068,6 @@ a.article-card--link {
   }
 
   .partners-track .partner-logo img {
-    height: 36px;
+    height: 26px;
   }
 }
