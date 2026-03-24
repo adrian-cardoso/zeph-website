@@ -1833,6 +1833,35 @@ a.article-card--link {
 
 .zeph-effect-item {
   padding: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.zeph-effect-item::before {
+  content: '';
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: rgba(38, 82, 66, 0.5);
+  filter: blur(50px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.zeph-effect-item--tl::before {
+  top: -20px;
+  left: -30px;
+}
+
+.zeph-effect-item--tr::before {
+  top: -10px;
+  right: -30px;
+}
+
+.zeph-effect-item--br::before {
+  bottom: -20px;
+  right: -20px;
 }
 
 .zeph-effect-item h3 {
