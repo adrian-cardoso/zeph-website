@@ -1541,6 +1541,13 @@ p {
   transition: var(--transition);
 }
 
+a.article-card--link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+}
+
 .article-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
