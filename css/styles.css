@@ -1170,6 +1170,8 @@ p {
   overflow-y: visible;
   width: 100%;
   padding: 10px 0;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
 .partners-marquee:hover .partners-track {
