@@ -543,6 +543,10 @@ p {
   z-index: 2;
 }
 
+.section:not(.sticky-cards-section) {
+  background-color: var(--bg, #fff);
+}
+
 .section-dark {
   background: var(--primary);
   color: white;
@@ -1758,6 +1762,9 @@ p {
   max-width: 480px;
   margin: 0 auto;
   padding-bottom: 10vh;
+}
+
+.sticky-cards-section {
   position: relative;
   z-index: 1;
 }
