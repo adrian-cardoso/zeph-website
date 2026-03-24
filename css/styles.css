@@ -1914,6 +1914,47 @@ a.article-card--link {
   }
 }
 
+/* ===== Work With Us Cards ===== */
+.work-with-us-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.work-card {
+  padding: 2rem;
+}
+
+.work-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(214, 255, 51, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.work-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  color: var(--primary);
+}
+
+.work-card p {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-light);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .work-with-us-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .editorial-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
