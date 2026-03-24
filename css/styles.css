@@ -543,8 +543,8 @@ p {
   z-index: 2;
 }
 
-.section:not(.sticky-cards-section) {
-  background-color: var(--bg, #fff);
+.sticky-cards-section {
+  z-index: 1;
 }
 
 .section-dark {
