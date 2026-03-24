@@ -1,35 +1,4 @@
-/* ===== Font Face ===== */
-@font-face {
-  font-family: 'Neue Haas Grotesk';
-  src: url('../fonts/NeueHaasGrotesk-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Neue Haas Grotesk';
-  src: url('../fonts/NeueHaasGrotesk-Italic.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Neue Haas Grotesk';
-  src: url('../fonts/NeueHaasGrotesk-BoldItalic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Neue Haas Grotesk';
-  src: url('../fonts/NeueHaasGrotesk-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
+/* Fonts loaded via Google Fonts in HTML head: Inter + DM Sans */
 
 /* ===== Scroll Reveal Animations ===== */
 .reveal {
@@ -93,7 +62,7 @@ html {
 }
 
 body {
-  font-family: 'Neue Haas Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'DM Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   color: var(--text-dark);
@@ -118,7 +87,7 @@ img {
 
 /* ===== Typography ===== */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Inter', 'Neue Haas Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Inter', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.1;
   color: var(--text-dark);
 }
@@ -166,7 +135,7 @@ p {
   border: none;
   cursor: pointer;
   transition: var(--transition);
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .btn-primary {
@@ -269,7 +238,7 @@ p {
   text-transform: uppercase;
   color: var(--text-dark);
   position: relative;
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .nav-links a::after {
@@ -385,7 +354,7 @@ p {
   text-transform: uppercase;
   color: var(--lime);
   margin-bottom: 1.5rem;
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .hero h1 {
@@ -446,7 +415,7 @@ p {
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 1rem;
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .split-content h2 {
@@ -552,7 +521,7 @@ p {
 }
 
 .stat-item .number {
-  font-family: 'Inter', 'Neue Haas Grotesk', sans-serif;
+  font-family: 'Inter', 'DM Sans', sans-serif;
   font-size: 3.5rem;
   font-weight: 700;
   color: var(--lime);
@@ -564,7 +533,7 @@ p {
   font-size: 0.875rem;
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.5;
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 /* ===== Section Styles ===== */
@@ -615,7 +584,7 @@ p {
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 1rem;
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .section-dark .section-label {
@@ -681,7 +650,7 @@ p {
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  font-family: 'Inter', 'Neue Haas Grotesk', sans-serif;
+  font-family: 'Inter', 'DM Sans', sans-serif;
   font-size: 1.125rem;
   font-weight: 700;
 }
@@ -798,7 +767,7 @@ p {
   align-items: center;
   gap: 0.5rem;
   letter-spacing: 0.05em;
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .section-dark .feature-link {
@@ -881,7 +850,7 @@ p {
 }
 
 .author-info h4 {
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.9375rem;
   font-weight: 700;
   margin-bottom: 0.125rem;
@@ -967,7 +936,7 @@ p {
 }
 
 .contact-item h4 {
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 700;
   margin-bottom: 0.25rem;
 }
@@ -1000,7 +969,7 @@ p {
   font-size: 0.875rem;
   margin-bottom: 0.5rem;
   color: var(--text-dark);
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .form-group input,
@@ -1011,7 +980,7 @@ p {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   font-size: 0.9375rem;
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   transition: var(--transition);
   background: var(--bg-cream);
 }
@@ -1042,7 +1011,7 @@ p {
   font-size: 0.75rem;
   color: #e53e3e;
   margin-top: 0.375rem;
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .form-group.error .error-message {
@@ -1087,7 +1056,7 @@ p {
 .footer-column h4 {
   color: var(--lime);
   margin-bottom: 1.5rem;
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.15em;
@@ -1176,7 +1145,7 @@ p {
   text-transform: uppercase;
   color: var(--text-light);
   margin-bottom: 1.25rem;
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .partners-marquee {
@@ -1288,7 +1257,7 @@ p {
   border: none;
   cursor: pointer;
   text-align: left;
-  font-family: 'Inter', 'Neue Haas Grotesk', sans-serif;
+  font-family: 'Inter', 'DM Sans', sans-serif;
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--text-dark);
@@ -1304,7 +1273,7 @@ p {
   font-weight: 300;
   transition: transform 0.3s ease;
   color: var(--primary);
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   flex-shrink: 0;
   margin-left: 1rem;
 }
@@ -1398,7 +1367,7 @@ p {
   color: var(--text-light);
   cursor: pointer;
   border-bottom: 2px solid transparent;
-  font-family: 'Neue Haas Grotesk', 'Inter', sans-serif;
+  font-family: 'DM Sans', 'Inter', sans-serif;
   transition: color 0.2s, border-color 0.2s;
 }
 
@@ -1540,7 +1509,7 @@ p {
 }
 
 .spec-item h4 {
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 700;
   font-size: 1rem;
   margin-bottom: 0.25rem;
@@ -1600,7 +1569,7 @@ p {
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 0.75rem;
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .article-body h3 {
@@ -1680,7 +1649,7 @@ p {
 }
 
 .editorial-stat-number {
-  font-family: 'Inter', 'Neue Haas Grotesk', sans-serif;
+  font-family: 'Inter', 'DM Sans', sans-serif;
   font-size: 4.5rem;
   font-weight: 700;
   color: var(--lime);
@@ -1743,7 +1712,7 @@ p {
 /* ===== Outcomes Grid (ring charts) ===== */
 .outcomes-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
 }
 
@@ -1826,7 +1795,7 @@ p {
 .ring-value {
   position: relative;
   z-index: 1;
-  font-family: 'Inter', 'Neue Haas Grotesk', sans-serif;
+  font-family: 'Inter', 'DM Sans', sans-serif;
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--text-dark);
@@ -1895,7 +1864,7 @@ p {
   margin-bottom: 0.25rem;
 }
 .attendance-value {
-  font-family: 'Inter', 'Neue Haas Grotesk', sans-serif;
+  font-family: 'Inter', 'DM Sans', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   color: white;
@@ -1927,7 +1896,7 @@ p {
 }
 
 .fact-number {
-  font-family: 'Inter', 'Neue Haas Grotesk', sans-serif;
+  font-family: 'Inter', 'DM Sans', sans-serif;
   font-size: 3rem;
   font-weight: 700;
   color: var(--lime);
@@ -1971,7 +1940,7 @@ p {
 }
 
 .chart-card h4 {
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 700;
   margin-bottom: 1.5rem;
 }
@@ -2110,7 +2079,7 @@ p {
 }
 
 .team-card h4 {
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 700;
   font-size: 1rem;
   margin-bottom: 0.25rem;
@@ -2148,7 +2117,7 @@ p {
 .comparison-table th {
   background: var(--primary);
   color: white;
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.875rem;
   font-weight: 700;
 }
@@ -2199,7 +2168,7 @@ p {
 }
 
 .trust-stat .number {
-  font-family: 'Inter', 'Neue Haas Grotesk', sans-serif;
+  font-family: 'Inter', 'DM Sans', sans-serif;
   font-size: 3rem;
   font-weight: 700;
   color: var(--primary);
@@ -2357,7 +2326,7 @@ p {
   font-weight: 600;
   color: var(--primary);
   margin-bottom: 2rem;
-  font-family: 'Neue Haas Grotesk', sans-serif;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .article-back-link:hover {
