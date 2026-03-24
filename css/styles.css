@@ -1751,6 +1751,47 @@ p {
   color: var(--accent);
 }
 
+/* ===== Sticky Scroll Cards ===== */
+.sticky-cards {
+  max-width: 480px;
+  margin: 0 auto;
+  padding-bottom: 10vh;
+}
+
+.sticky-card {
+  position: sticky;
+  top: calc(80px + var(--card-index) * 24px);
+  margin-bottom: 3rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  background: #faf8f5;
+}
+
+.sticky-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-lg);
+}
+
+.sticky-card:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .sticky-cards {
+    max-width: 100%;
+    padding-bottom: 5vh;
+  }
+
+  .sticky-card {
+    top: calc(60px + var(--card-index) * 16px);
+    margin-bottom: 2rem;
+  }
+}
+
 .outcome-card--custom {
   padding: 2rem 1.5rem;
 }
