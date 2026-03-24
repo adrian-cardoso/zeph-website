@@ -2489,6 +2489,68 @@ a.article-card--link {
   margin: 0;
 }
 
+/* ===== Team Members (About Page) ===== */
+.team-member {
+  text-align: left;
+}
+
+.team-photo {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--border);
+  margin-bottom: 1.25rem;
+}
+
+.team-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.team-member:hover .team-photo img {
+  filter: grayscale(0%);
+}
+
+.team-role {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.team-member h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: var(--primary);
+}
+
+.team-member p {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--text-light);
+  margin: 0;
+}
+
+#team .team-grid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem 3rem;
+}
+
+@media (max-width: 768px) {
+  #team .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-photo {
+    width: 180px;
+    height: 180px;
+  }
+}
+
 /* ===== Comparison Table ===== */
 .comparison-table {
   width: 100%;
