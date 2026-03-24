@@ -1470,6 +1470,24 @@ p {
   color: var(--lime);
 }
 
+.scroll-indicator {
+  display: inline-block;
+  margin-top: 2rem;
+  color: rgba(255, 255, 255, 0.8);
+  animation: bounceDown 2s ease infinite;
+  transition: color 0.2s;
+}
+
+.scroll-indicator:hover {
+  color: var(--lime);
+}
+
+@keyframes bounceDown {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(8px); }
+  60% { transform: translateY(4px); }
+}
+
 /* ===== Product Showcase ===== */
 .product-hero {
   display: grid;
