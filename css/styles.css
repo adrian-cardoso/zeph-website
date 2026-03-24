@@ -1,5 +1,10 @@
 /* Fonts loaded via Google Fonts in HTML head: Inter + DM Sans */
 
+#demo-request,
+#contact {
+  scroll-margin-top: 70px;
+}
+
 /* ===== Scroll Reveal Animations ===== */
 .reveal {
   opacity: 0;
@@ -222,6 +227,12 @@ p {
 .logo img {
   height: 28px;
   width: auto;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.header .logo:hover img {
+  transform: scale(1.06);
+  opacity: 0.85;
 }
 
 .nav-links {
