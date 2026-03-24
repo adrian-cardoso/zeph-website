@@ -157,12 +157,19 @@ p {
 .btn-lime {
   background: var(--lime);
   color: var(--primary);
+  animation: limeGlow 2.5s ease-in-out infinite;
 }
 
 .btn-lime:hover {
   background: #c4eb2e;
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 0 20px rgba(214, 255, 50, 0.6);
+  animation: none;
+}
+
+@keyframes limeGlow {
+  0%, 100% { box-shadow: 0 0 5px rgba(214, 255, 50, 0.2); }
+  50% { box-shadow: 0 0 18px rgba(214, 255, 50, 0.5), 0 0 30px rgba(214, 255, 50, 0.2); }
 }
 
 .btn-secondary {
@@ -1174,8 +1181,30 @@ p {
   mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
-.partners-marquee:hover .partners-track {
+.partners-marquee.paused .partners-track {
   animation-play-state: paused;
+}
+
+.pause-motion-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0 0;
+  padding: 0.4rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.pause-motion-btn:hover {
+  opacity: 1;
 }
 
 .partners-track {

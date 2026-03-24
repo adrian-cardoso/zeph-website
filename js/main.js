@@ -577,3 +577,17 @@ document.addEventListener('keydown', (e) => {
     sessionStorage.setItem('zeph-modal-dismissed', 'true');
   }
 });
+
+// ===== Pause Motion Button =====
+const pauseBtn = document.getElementById('pauseMotionBtn');
+const marquee = document.querySelector('.partners-marquee');
+if (pauseBtn && marquee) {
+  pauseBtn.addEventListener('click', function() {
+    marquee.classList.toggle('paused');
+    const isPaused = marquee.classList.contains('paused');
+    pauseBtn.querySelector('span').textContent = isPaused ? 'PLAY MOTION' : 'PAUSE MOTION';
+    pauseBtn.querySelector('svg').innerHTML = isPaused
+      ? '<circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/>'
+      : '<circle cx="12" cy="12" r="10"/><line x1="10" y1="15" x2="10" y2="9"/><line x1="14" y1="15" x2="14" y2="9"/>';
+  });
+}
