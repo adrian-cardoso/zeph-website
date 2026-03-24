@@ -1840,11 +1840,11 @@ a.article-card--link {
 .zeph-effect-item::before {
   content: '';
   position: absolute;
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-  background: rgba(38, 82, 66, 0.5);
-  filter: blur(50px);
+  background: rgba(100, 160, 130, 0.45);
+  filter: blur(60px);
   z-index: -1;
   pointer-events: none;
 }
