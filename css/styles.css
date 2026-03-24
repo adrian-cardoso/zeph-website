@@ -1199,7 +1199,7 @@ p {
 }
 
 .partners-track .partner-logo img {
-  height: 28px;
+  height: 56px;
   width: auto;
   object-fit: contain;
   filter: grayscale(100%);
@@ -2937,7 +2937,7 @@ a.article-card--link {
   }
 
   .partners-track .partner-logo img {
-    height: 22px;
+    height: 44px;
   }
 }
 
@@ -3068,6 +3068,6 @@ a.article-card--link {
   }
 
   .partners-track .partner-logo img {
-    height: 18px;
+    height: 36px;
   }
 }
