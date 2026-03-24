@@ -539,6 +539,8 @@ p {
 /* ===== Section Styles ===== */
 .section {
   padding: 4rem 0;
+  position: relative;
+  z-index: 2;
 }
 
 .section-dark {
@@ -1756,6 +1758,8 @@ p {
   max-width: 480px;
   margin: 0 auto;
   padding-bottom: 10vh;
+  position: relative;
+  z-index: 1;
 }
 
 .sticky-card {
