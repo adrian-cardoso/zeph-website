@@ -2111,7 +2111,7 @@ a.article-card--link {
 
 .sticky-card {
   position: sticky;
-  top: calc(80px + var(--card-index) * 24px);
+  top: calc(80px + var(--card-index) * 48px);
   margin-bottom: 3rem;
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -2138,7 +2138,7 @@ a.article-card--link {
   }
 
   .sticky-card {
-    top: calc(60px + var(--card-index) * 16px);
+    top: calc(60px + var(--card-index) * 40px);
     margin-bottom: 2rem;
   }
 }
