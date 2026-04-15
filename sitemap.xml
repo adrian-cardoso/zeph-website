@@ -71,22 +71,12 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://zeph.com/help.html</loc>
-    <lastmod>2026-02-11</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://zeph.com/privacy.html</loc>
     <lastmod>2026-02-11</lastmod>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://zeph.com/terms.html</loc>
-    <lastmod>2026-02-11</lastmod>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://zeph.com/hipaa.html</loc>
     <lastmod>2026-02-11</lastmod>
     <priority>0.4</priority>
   </url>

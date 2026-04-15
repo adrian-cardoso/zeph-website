@@ -25,7 +25,7 @@ Marketing website for **Zeph** — a clinical-grade smart respiratory health dev
 - **Patients / Clinicians** — Audience-specific content
 - **Blog** — Health and wellness articles
 - **About, Careers, Help** — Company info
-- **Privacy, Terms, HIPAA** — Legal and compliance
+- **Privacy, Terms** — Legal and compliance
 
 ## Running Locally
 

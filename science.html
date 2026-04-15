@@ -51,7 +51,8 @@
         </ul>
 
         <div class="nav-cta">
-          <a href="index.html#contact" class="btn btn-primary">Request a Demo</a>
+          <a href="signin.html" class="btn btn-secondary">Sign In</a>
+          <a href="index.html#contact" class="btn btn-primary">Contact Us</a>
         </div>
 
         <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false">
@@ -80,7 +81,7 @@
   <main id="main-content">
 
     <!-- ===== Outcomes Grid ===== -->
-    <section class="section sticky-cards-section">
+    <section class="section">
       <div class="container">
         <div class="section-header">
           <span class="section-label">Outcomes</span>
@@ -88,19 +89,11 @@
           <p>Clinical data demonstrating Zeph's impact on respiratory health.</p>
         </div>
 
-        <div class="sticky-cards">
-          <div class="sticky-card" style="--card-index: 0;">
-            <img src="images/card-01.png" alt="2 Minute Step Test" loading="lazy">
-          </div>
-          <div class="sticky-card" style="--card-index: 1;">
-            <img src="images/card-02.png" alt="30 Second Sit to Stand" loading="lazy">
-          </div>
-          <div class="sticky-card" style="--card-index: 2;">
-            <img src="images/card-03.png" alt="CAT Score" loading="lazy">
-          </div>
-          <div class="sticky-card" style="--card-index: 3;">
-            <img src="images/card-04.png" alt="NPS" loading="lazy">
-          </div>
+        <div class="outcomes-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 900px; margin: 0 auto;">
+          <img src="images/card-01.png" alt="2 Minute Step Test" loading="lazy" style="width: 100%; height: auto; display: block; border-radius: var(--radius-lg);">
+          <img src="images/card-02.png" alt="30 Second Sit to Stand" loading="lazy" style="width: 100%; height: auto; display: block; border-radius: var(--radius-lg);">
+          <img src="images/card-03.png" alt="CAT Score" loading="lazy" style="width: 100%; height: auto; display: block; border-radius: var(--radius-lg);">
+          <img src="images/card-04.png" alt="NPS" loading="lazy" style="width: 100%; height: auto; display: block; border-radius: var(--radius-lg);">
         </div>
       </div>
     </section>
@@ -169,7 +162,7 @@
               <span class="ring-value">72%</span>
             </div>
             <h3 style="margin-top: 1.5rem;">Lung Capacity Improvement</h3>
-            <p style="color: var(--text-muted);">Average improvement after 12 weeks of Zeph training</p>
+            <p style="color: var(--text-muted);">Average improvement after 9 weeks of Zeph training</p>
           </div>
 
         </div>
@@ -271,10 +264,8 @@
         <div class="footer-column">
           <h4>Support</h4>
           <ul class="footer-links">
-            <li><a href="help.html">Help Center</a></li>
             <li><a href="privacy.html">Privacy Policy</a></li>
             <li><a href="terms.html">Terms of Service</a></li>
-            <li><a href="hipaa.html">HIPAA Compliance</a></li>
           </ul>
         </div>
       </div>
@@ -299,7 +290,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=3"></script>
+  <script src="js/main.js?v=4"></script>
   <script src="js/science.js"></script>
   <script src="js/chatbot-data.js"></script>
   <script src="js/chatbot.js"></script>

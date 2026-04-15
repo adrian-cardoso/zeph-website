@@ -173,8 +173,8 @@ var ZephChatbotData = (function () {
         { words: ['warranty', 'guarantee', 'policy'], weight: 3 },
         { words: ['cancel', 'cancellation'], weight: 2 }
       ],
-      answer: "We want you to be completely satisfied with your Zeph trainer. For details about our return policy, warranty, and satisfaction guarantee, please contact our support team at **support@zeph.com** or visit our Help Center.",
-      quickReplies: ['Contact support', 'Help Center', 'Warranty']
+      answer: "We want you to be completely satisfied with your Zeph trainer. For details about our return policy, warranty, and satisfaction guarantee, please contact our support team at **support@zeph.com**.",
+      quickReplies: ['Contact support', 'Warranty']
     },
     {
       id: 'contact',
@@ -184,16 +184,16 @@ var ZephChatbotData = (function () {
         { words: ['human', 'agent', 'person', 'representative'], weight: 3 }
       ],
       answer: "You can reach our team in several ways:\n\n• **Email:** support@zeph.com (we respond within 24 hours)\n• **Phone:** (555) 123-4567\n• **Contact form:** Visit our [Contact page](index.html#contact)\n\nOur support team is happy to help with any questions!",
-      quickReplies: ['Help Center', 'Troubleshooting', 'Returns']
+      quickReplies: ['Troubleshooting', 'Returns']
     },
     {
-      id: 'hipaa',
+      id: 'data-security',
       keywords: [
-        { words: ['hipaa', 'privacy', 'data privacy', 'data security'], weight: 5 },
+        { words: ['privacy', 'data privacy', 'data security'], weight: 5 },
         { words: ['secure', 'security', 'protected', 'encryption'], weight: 3 },
-        { words: ['compliant', 'compliance', 'regulation', 'phi'], weight: 3 }
+        { words: ['compliant', 'compliance', 'regulation'], weight: 3 }
       ],
-      answer: "Zeph takes data privacy very seriously. We are fully **HIPAA-compliant**, meaning your personal health information is protected with industry-leading security measures. Your data is encrypted both in transit and at rest. For full details, visit our [HIPAA Compliance page](hipaa.html) and [Privacy Policy](privacy.html).",
+      answer: "Zeph takes data privacy very seriously. Your personal health information is protected with industry-leading security measures. Your data is encrypted both in transit and at rest. For full details, read our [Privacy Policy](privacy.html).",
       quickReplies: ['Privacy policy', 'Share with doctor', 'Contact support']
     },
 
@@ -206,7 +206,7 @@ var ZephChatbotData = (function () {
         { words: ['remote monitoring', 'patient monitoring', 'dashboard'], weight: 3 }
       ],
       answer: "Zeph offers a dedicated clinician platform for healthcare providers. The clinician dashboard enables **remote patient monitoring**, provides clinical-grade respiratory data, and supports data-driven care decisions between office visits. Visit our [Clinicians page](clinicians.html) to learn more about partnering with Zeph.",
-      quickReplies: ['Share with doctor', 'HIPAA', 'Contact us']
+      quickReplies: ['Share with doctor', 'Privacy policy', 'Contact us']
     },
     {
       id: 'share-with-doctor',
@@ -216,7 +216,7 @@ var ZephChatbotData = (function () {
         { words: ['send', 'results', 'care team'], weight: 2 }
       ],
       answer: "Yes! The Zeph app lets you **export clinical-grade respiratory reports** to share with your healthcare provider. Your doctor can also use the Zeph clinician dashboard for remote monitoring if their practice is a Zeph partner. This helps enable more informed care decisions between office visits.",
-      quickReplies: ['Clinician info', 'App features', 'HIPAA']
+      quickReplies: ['Clinician info', 'App features', 'Privacy policy']
     },
 
     // ===== Health Topics =====
@@ -338,28 +338,19 @@ var ZephChatbotData = (function () {
       quickReplies: ['Careers', 'Contact us', 'The science']
     },
     {
-      id: 'help-center',
-      keywords: [
-        { words: ['help center', 'faq', 'frequently asked', 'support page'], weight: 5 },
-        { words: ['help', 'question', 'answer'], weight: 1 }
-      ],
-      answer: "Our Help Center has answers to the most common questions about setting up, using, and maintaining your Zeph trainer. Visit the [Help Center](help.html) for FAQs, troubleshooting tips, and ways to get in touch with our support team.",
-      quickReplies: ['Setup guide', 'Troubleshooting', 'Contact support']
-    },
-    {
       id: 'privacy',
       keywords: [
         { words: ['privacy', 'privacy policy', 'data collection', 'personal data'], weight: 4 },
         { words: ['cookies', 'tracking', 'information', 'gdpr'], weight: 3 }
       ],
       answer: "Your privacy matters to us. We collect only the data necessary to provide and improve the Zeph experience, and we never sell your personal information. For full details, read our [Privacy Policy](privacy.html).",
-      quickReplies: ['HIPAA', 'Contact support', 'Data security']
+      quickReplies: ['Contact support', 'Data security']
     }
   ];
 
   var fallbackResponse = {
     answer: "I'm not sure I understood that. Could you try rephrasing your question? I can help with topics like the Zeph product, breathing exercises, respiratory health, pricing, setup, and support.",
-    quickReplies: ['What is Zeph?', 'Breathing exercises', 'Contact support', 'Help Center']
+    quickReplies: ['What is Zeph?', 'Breathing exercises', 'Contact support']
   };
 
   var welcomeMessage = {
