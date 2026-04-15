@@ -1,8 +1,9 @@
 /* Fonts loaded via Google Fonts in HTML head: Inter + DM Sans */
 
 #demo-request,
-#contact {
-  scroll-margin-top: 70px;
+#contact,
+section[id] {
+  scroll-margin-top: 100px;
 }
 
 /* ===== Scroll Reveal Animations ===== */
@@ -64,6 +65,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 100px;
 }
 
 body {
@@ -742,6 +744,9 @@ p {
   border-radius: var(--radius-lg);
   transition: var(--transition);
   border: 1px solid rgba(38, 82, 66, 0.08);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .section-dark .feature-card {
@@ -781,6 +786,7 @@ p {
 .feature-card p {
   margin-bottom: 1rem;
   font-size: 0.9375rem;
+  flex: 1;
 }
 
 .feature-link {
@@ -809,12 +815,41 @@ p {
   gap: 2rem;
 }
 
+/* Testimonials Marquee */
+.testimonials-marquee {
+  overflow-x: hidden;
+  width: 100%;
+  padding: 10px 0;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+.testimonials-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: testimonials-scroll 60s linear infinite;
+}
+
+@keyframes testimonials-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 .testimonial-card {
   background: white;
   padding: 2.5rem;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
   transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.testimonials-track .testimonial-card {
+  width: 450px;
+  min-width: 450px;
+  flex-shrink: 0;
 }
 
 .testimonial-card:hover {
@@ -1122,6 +1157,8 @@ p {
 .social-links a {
   width: 40px;
   height: 40px;
+  pointer-events: none;
+  cursor: default;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   display: flex;
@@ -2099,7 +2136,7 @@ a.article-card--link {
 
 /* ===== Sticky Scroll Cards ===== */
 .sticky-cards {
-  max-width: 480px;
+  max-width: 960px;
   margin: 0 auto;
   padding-bottom: 10vh;
 }

@@ -8,3 +8,29 @@ document.querySelectorAll('.bar-fill[data-width]').forEach(fill => {
     fill.setAttribute('data-width', val + '%');
   }
 });
+
+// Outcomes cards: hide initially, reveal with stagger on first scroll
+(function() {
+  const grid = document.querySelector('.outcomes-grid');
+  if (!grid) return;
+
+  const cards = Array.from(grid.children);
+  cards.forEach(card => {
+    card.classList.add('reveal', 'reveal-up');
+  });
+
+  function startObserving() {
+    window.removeEventListener('scroll', startObserving);
+    cards.forEach((card, i) => {
+      card.style.transitionDelay = `${i * 0.15}s`;
+    });
+    // Small RAF delay so transition delays are applied before adding 'revealed'
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        cards.forEach(card => card.classList.add('revealed'));
+      });
+    });
+  }
+
+  window.addEventListener('scroll', startObserving, { once: true });
+})();

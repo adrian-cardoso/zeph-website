@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — Zeph</title>
+  <meta name="description" content="Sign in to your Zeph account.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/portal.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="page-transition">
+
+  <header class="header" id="header">
+    <div class="container">
+      <nav class="nav" aria-label="Main navigation">
+        <a href="index.html" class="logo"><img src="images/logo-dark.png" alt="Zeph"></a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html#how-it-works">How It Works</a></li>
+          <li><a href="science.html">The Science</a></li>
+          <li><a href="patients.html">Patients</a></li>
+          <li><a href="clinicians.html">For Clinicians</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="index.html#contact" class="btn btn-primary">Contact Us</a>
+        </div>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="signin-page">
+    <div class="signin-container">
+      <div class="signin-card">
+        <div class="signin-header">
+          <img src="images/logo-dark.png" alt="Zeph" class="signin-logo">
+          <h1>Welcome back</h1>
+          <p>Sign in to your Zeph account</p>
+        </div>
+
+        <!-- Sign In Form -->
+        <form id="signinForm" class="signin-form">
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" required placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="password-wrap">
+              <input type="password" id="password" name="password" required placeholder="Enter your password" autocomplete="current-password">
+              <button type="button" class="password-toggle" id="togglePassword" aria-label="Show password">
+                <svg class="eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                <svg class="eye-closed" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="form-options">
+            <label class="checkbox-label">
+              <input type="checkbox" id="rememberMe" checked>
+              <span>Remember me</span>
+            </label>
+            <a href="#" id="forgotLink" class="forgot-link">Forgot password?</a>
+          </div>
+          <div class="form-error" id="formError" hidden></div>
+          <div class="form-success" id="formSuccess" hidden></div>
+          <button type="submit" class="btn btn-primary btn-full" id="signinBtn">
+            <span class="btn-text">Sign In</span>
+          </button>
+        </form>
+
+        <!-- Forgot Password Form -->
+        <form id="forgotForm" class="signin-form" hidden>
+          <div class="form-group">
+            <label for="resetEmail">Email address</label>
+            <input type="email" id="resetEmail" required placeholder="you@example.com" autocomplete="email">
+          </div>
+          <div class="form-error" id="resetError" hidden></div>
+          <div class="form-success" id="resetSuccess" hidden></div>
+          <button type="submit" class="btn btn-primary btn-full" id="resetBtn">
+            <span class="btn-text">Send Reset Link</span>
+          </button>
+          <div style="text-align:center;margin-top:1rem;">
+            <a href="#" id="backToLogin" class="forgot-link">Back to sign in</a>
+          </div>
+        </form>
+
+        <div class="signin-footer">
+          <a href="index.html">&larr; Back to homepage</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js?v=4"></script>
+  <script>
+    // Load saved email
+    const savedEmail = localStorage.getItem('zeph_email');
+    if (savedEmail) document.getElementById('email').value = savedEmail;
+
+    // Redirect if already signed in
+    (async () => {
+      const session = await getSession();
+      if (session) {
+        const profile = await getUserProfile(session.user.id);
+        if (profile?.role === 'admin') window.location.href = '/admin/';
+        else if (profile?.role === 'patient') window.location.href = '/portal/';
+      }
+    })();
+
+    // Toggle password visibility
+    document.getElementById('togglePassword').addEventListener('click', () => {
+      const input = document.getElementById('password');
+      const open = document.querySelector('.eye-open');
+      const closed = document.querySelector('.eye-closed');
+      if (input.type === 'password') {
+        input.type = 'text';
+        open.style.display = 'none';
+        closed.style.display = 'block';
+      } else {
+        input.type = 'password';
+        open.style.display = 'block';
+        closed.style.display = 'none';
+      }
+    });
+
+    // Toggle forgot/signin forms
+    document.getElementById('forgotLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('signinForm').hidden = true;
+      document.getElementById('forgotForm').hidden = false;
+      document.getElementById('resetEmail').value = document.getElementById('email').value;
+    });
+
+    document.getElementById('backToLogin').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('forgotForm').hidden = true;
+      document.getElementById('signinForm').hidden = false;
+    });
+
+    // Sign In
+    document.getElementById('signinForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('signinBtn');
+      const errorEl = document.getElementById('formError');
+      const successEl = document.getElementById('formSuccess');
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const remember = document.getElementById('rememberMe').checked;
+
+      errorEl.hidden = true;
+      successEl.hidden = true;
+      btn.querySelector('.btn-text').textContent = 'Signing in...';
+      btn.disabled = true;
+
+      try {
+        const { session } = await signIn(email, password);
+
+        // Save email if remember me
+        if (remember) localStorage.setItem('zeph_email', email);
+        else localStorage.removeItem('zeph_email');
+
+        const profile = await getUserProfile(session.user.id);
+
+        if (profile?.role === 'admin') window.location.href = '/admin/';
+        else if (profile?.role === 'patient') window.location.href = '/portal/';
+        else {
+          errorEl.textContent = 'Your account does not have portal access. Contact your administrator.';
+          errorEl.hidden = false;
+        }
+      } catch (err) {
+        errorEl.textContent = err.message || 'Invalid email or password.';
+        errorEl.hidden = false;
+      } finally {
+        btn.querySelector('.btn-text').textContent = 'Sign In';
+        btn.disabled = false;
+      }
+    });
+
+    // Forgot Password
+    document.getElementById('forgotForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('resetBtn');
+      const errorEl = document.getElementById('resetError');
+      const successEl = document.getElementById('resetSuccess');
+      const email = document.getElementById('resetEmail').value.trim();
+
+      errorEl.hidden = true;
+      successEl.hidden = true;
+      btn.querySelector('.btn-text').textContent = 'Sending...';
+      btn.disabled = true;
+
+      try {
+        await resetPassword(email);
+        successEl.textContent = 'Password reset link sent! Check your email.';
+        successEl.hidden = false;
+      } catch (err) {
+        errorEl.textContent = err.message || 'Could not send reset email.';
+        errorEl.hidden = false;
+      } finally {
+        btn.querySelector('.btn-text').textContent = 'Send Reset Link';
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

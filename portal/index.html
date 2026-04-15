@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portal — Zeph</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/portal.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="page-transition">
+
+  <header class="header" id="header">
+    <div class="container">
+      <nav class="nav" aria-label="Main navigation">
+        <a href="../index.html" class="logo"><img src="../images/logo-dark.png" alt="Zeph"></a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="../index.html#how-it-works">How It Works</a></li>
+          <li><a href="../science.html">The Science</a></li>
+          <li><a href="../patients.html">Patients</a></li>
+          <li><a href="../clinicians.html">For Clinicians</a></li>
+          <li><a href="../about.html">About</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="../index.html#contact" class="btn btn-primary">Contact Us</a>
+        </div>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="portal-layout">
+    <!-- Sidebar -->
+    <aside class="portal-sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h3>Patient Portal</h3>
+        <p id="patientName">Loading...</p>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="active" data-section="videos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          How It Works
+        </a>
+      </nav>
+      <div class="sidebar-signout">
+        <a href="#" onclick="signOut(); return false;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Sign Out
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="portal-main" id="portalMain">
+      <section id="sec-videos">
+        <div class="portal-topbar">
+          <div>
+            <h1>How It Works</h1>
+            <p style="color:var(--text-light);margin-top:0.25rem;">Watch these videos to learn how to use your Zeph device and get the most out of your treatment.</p>
+          </div>
+        </div>
+
+        <div class="video-grid" id="videoGrid">
+          <div class="empty-state">
+            <p>Loading videos...</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Video Player Modal -->
+  <div class="modal-overlay video-modal" id="playerModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="playerTitle">Video</h2>
+        <button class="modal-close" onclick="closePlayer()">&times;</button>
+      </div>
+      <video id="videoPlayer" controls></video>
+      <div class="video-info">
+        <p id="playerDesc" style="margin-bottom:0;"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile sidebar toggle -->
+  <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+
+  <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="../js/supabase-config.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/main.js?v=4"></script>
+  <script>
+    // ===== Auth Guard =====
+    let currentProfile = null;
+
+    (async () => {
+      const result = await requireAuth(['patient']);
+      if (!result) return;
+      currentProfile = result.profile;
+      document.getElementById('patientName').textContent = currentProfile.full_name || currentProfile.email;
+      loadVideos();
+    })();
+
+    // Mobile sidebar toggle
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
+    if (sidebarToggle) {
+      sidebarToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
+    }
+
+    // ===== Load & Render Videos =====
+    async function loadVideos() {
+      const { data, error } = await db
+        .from('videos')
+        .select('*')
+        .order('display_order', { ascending: true });
+
+      const grid = document.getElementById('videoGrid');
+
+      if (error || !data?.length) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column: 1 / -1;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+            <h3>No videos available yet</h3>
+            <p>Your care team will upload instructional videos here. Check back soon!</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = data.map(v => `
+        <div class="video-card">
+          <div class="video-card-thumb" onclick="playVideo('${v.id}')">
+            ${v.thumbnail_url
+              ? `<img src="${v.thumbnail_url}" alt="${escapeAttr(v.title)}" loading="lazy">`
+              : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--primary);">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--lime)" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                </div>`
+            }
+            <button class="play-btn" aria-label="Play ${escapeAttr(v.title)}">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </button>
+          </div>
+          <div class="video-card-body">
+            <span class="video-card-order">${v.display_order}</span>
+            <h3>${escapeHtml(v.title)}</h3>
+            <p>${escapeHtml(v.description || '')}</p>
+          </div>
+        </div>
+      `).join('');
+
+      // Store videos for the player
+      window._videos = data;
+    }
+
+    // ===== Video Player =====
+    function playVideo(id) {
+      const video = window._videos?.find(v => v.id === id);
+      if (!video) return;
+      document.getElementById('playerTitle').textContent = video.title;
+      document.getElementById('playerDesc').textContent = video.description || '';
+      const player = document.getElementById('videoPlayer');
+      player.src = video.video_url;
+      document.getElementById('playerModal').classList.add('active');
+      player.play();
+    }
+
+    function closePlayer() {
+      const player = document.getElementById('videoPlayer');
+      player.pause();
+      player.src = '';
+      document.getElementById('playerModal').classList.remove('active');
+    }
+
+    // Close modal on overlay click
+    document.getElementById('playerModal').addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal-overlay')) closePlayer();
+    });
+
+    // ===== Helpers =====
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function escapeAttr(str) {
+      return str.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+  </script>
+</body>
+</html>

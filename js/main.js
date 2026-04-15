@@ -348,22 +348,39 @@ document.querySelectorAll('.form-group input, .form-group textarea, .form-group 
 const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (!validateForm(contactForm)) return;
 
     const formData = new FormData(contactForm);
     const data = Object.fromEntries(formData);
-    console.log('Form submitted:', data);
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
 
-    contactForm.innerHTML = `
-      <div style="text-align:center; padding:3rem 1rem;">
-        <div style="width:64px;height:64px;background:#D6FF33;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;color:#265242;font-size:1.5rem;font-weight:700;">&#10003;</div>
-        <h3 style="margin-bottom:0.5rem;">Thank You!</h3>
-        <p>We've received your message and will get back to you shortly.</p>
-      </div>
-    `;
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) throw new Error('Send failed');
+
+      contactForm.innerHTML = `
+        <div style="text-align:center; padding:3rem 1rem;">
+          <div style="width:64px;height:64px;background:#D6FF33;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;color:#265242;font-size:1.5rem;font-weight:700;">&#10003;</div>
+          <h3 style="margin-bottom:0.5rem;">Thank You!</h3>
+          <p>We've received your message and will get back to you shortly.</p>
+        </div>
+      `;
+    } catch (err) {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+      alert('Something went wrong. Please email Info@zephbreath.com directly.');
+    }
   });
 }
 
@@ -371,22 +388,39 @@ if (contactForm) {
 const demoForm = document.getElementById('demoForm');
 
 if (demoForm) {
-  demoForm.addEventListener('submit', (e) => {
+  demoForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (!validateForm(demoForm)) return;
 
     const formData = new FormData(demoForm);
     const data = Object.fromEntries(formData);
-    console.log('Demo requested:', data);
+    const submitBtn = demoForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
 
-    demoForm.innerHTML = `
-      <div style="text-align:center; padding:3rem 1rem;">
-        <div style="width:64px;height:64px;background:#D6FF33;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;color:#265242;font-size:1.5rem;font-weight:700;">&#10003;</div>
-        <h3 style="margin-bottom:0.5rem;">Demo Requested!</h3>
-        <p>Our clinical partnerships team will reach out within 24 hours.</p>
-      </div>
-    `;
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) throw new Error('Send failed');
+
+      demoForm.innerHTML = `
+        <div style="text-align:center; padding:3rem 1rem;">
+          <div style="width:64px;height:64px;background:#D6FF33;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;color:#265242;font-size:1.5rem;font-weight:700;">&#10003;</div>
+          <h3 style="margin-bottom:0.5rem;">Demo Requested!</h3>
+          <p>Our clinical partnerships team will reach out within 24 hours.</p>
+        </div>
+      `;
+    } catch (err) {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+      alert('Something went wrong. Please email Info@zephbreath.com directly.');
+    }
   });
 }
 
@@ -591,3 +625,95 @@ if (pauseBtn && marquee) {
       : '<circle cx="12" cy="12" r="10"/><line x1="10" y1="15" x2="10" y2="9"/><line x1="14" y1="15" x2="14" y2="9"/>';
   });
 }
+
+// ===== Hash scroll helper =====
+function jumpToElement(el) {
+  const headerHeight = document.querySelector('.header')?.offsetHeight || 80;
+  const absoluteTop = el.getBoundingClientRect().top + window.pageYOffset;
+  window.scrollTo(0, absoluteTop - headerHeight - 20);
+}
+
+function waitForImages() {
+  // Force all lazy images to eager and wait for them to load
+  const promises = [];
+  document.querySelectorAll('img').forEach(img => {
+    img.loading = 'eager';
+    if (!img.complete) {
+      promises.push(new Promise(resolve => {
+        img.addEventListener('load', resolve, { once: true });
+        img.addEventListener('error', resolve, { once: true });
+      }));
+    }
+  });
+  return Promise.all(promises);
+}
+
+function revealAll() {
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('revealed'));
+}
+
+// On page load with hash
+if (window.location.hash) {
+  revealAll();
+  document.documentElement.style.scrollBehavior = 'auto';
+
+  // Hide page while we get scroll position right
+  document.body.style.opacity = '0';
+  document.body.style.transition = 'opacity 0.3s ease';
+
+  const target = document.querySelector(window.location.hash);
+  if (target) {
+    let attempts = 0;
+    let shown = false;
+    const correctScroll = setInterval(() => {
+      jumpToElement(target);
+      attempts++;
+      // Show page after images loaded or after 800ms, whichever is first
+      if (!shown && attempts >= 8) {
+        document.body.style.opacity = '1';
+        shown = true;
+      }
+      if (attempts >= 20) {
+        clearInterval(correctScroll);
+        document.documentElement.style.scrollBehavior = '';
+        if (!shown) document.body.style.opacity = '1';
+      }
+    }, 100);
+
+    waitForImages().then(() => {
+      jumpToElement(target);
+      if (!shown) {
+        document.body.style.opacity = '1';
+        shown = true;
+      }
+    });
+  } else {
+    document.body.style.opacity = '1';
+  }
+}
+
+// Intercept all same-page anchor clicks
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a[href*="#"]');
+  if (!link) return;
+  const href = link.getAttribute('href');
+  const hashIndex = href.indexOf('#');
+  if (hashIndex === -1) return;
+  const hash = href.slice(hashIndex);
+  const path = href.slice(0, hashIndex);
+
+  const isSamePage = !path
+    || path === 'index.html' && (location.pathname === '/' || location.pathname.endsWith('/') || location.pathname.endsWith('index.html'));
+
+  if (!isSamePage) return;
+
+  const target = document.querySelector(hash);
+  if (!target) return;
+
+  e.preventDefault();
+  revealAll();
+
+  waitForImages().then(() => {
+    jumpToElement(target);
+  });
+});
