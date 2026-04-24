@@ -2472,6 +2472,16 @@ a.article-card--link {
   gap: 2rem;
 }
 
+/* Separates the executive row (CMO / CEO / CTO) from the rest of the team.
+   Spans every grid column and fades out at the edges so it reads as a
+   soft hairline rather than a full-bleed border. */
+.team-divider {
+  grid-column: 1 / -1;
+  height: 1px;
+  margin: 0.5rem 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(38, 82, 66, 0.2) 50%, transparent 100%);
+}
+
 .team-card {
   text-align: center;
   padding: 2rem 1.5rem;
