@@ -2544,11 +2544,6 @@ a.article-card--link {
   height: 100%;
   object-fit: cover;
   filter: grayscale(100%);
-  transition: filter 0.3s ease;
-}
-
-.team-member:hover .team-photo img {
-  filter: grayscale(0%);
 }
 
 .team-role {

@@ -181,9 +181,10 @@
       <section id="sec-patients" hidden>
         <div class="portal-topbar">
           <div>
-            <h1>Patients</h1>
-            <p class="topbar-subtitle">View and manage patient accounts.</p>
+            <h1>Users</h1>
+            <p class="topbar-subtitle">Create accounts and manage permissions.</p>
           </div>
+          <button class="btn btn-primary" onclick="openUserModal()">+ Add User</button>
         </div>
         <div class="portal-table-wrap">
           <table class="portal-table">
@@ -191,12 +192,13 @@
               <tr>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Role</th>
+                <th style="width:160px;">Role</th>
                 <th>Joined</th>
+                <th style="width:120px;">Actions</th>
               </tr>
             </thead>
             <tbody id="patientsTableBody">
-              <tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--text-light);">Loading...</td></tr>
+              <tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-light);">Loading...</td></tr>
             </tbody>
           </table>
         </div>
@@ -347,6 +349,43 @@
         <div class="modal-actions">
           <button type="button" class="btn btn-secondary" onclick="closeVideoModal()">Cancel</button>
           <button type="submit" class="btn btn-primary" id="videoSubmitBtn">Upload & Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add User Modal -->
+  <div class="modal-overlay" id="userModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Add User</h2>
+        <button class="modal-close" onclick="closeUserModal()">&times;</button>
+      </div>
+      <form class="portal-form" id="userForm" onsubmit="saveUser(event)">
+        <div class="form-group">
+          <label for="userFullName">Full Name</label>
+          <input type="text" id="userFullName" placeholder="Jane Doe">
+        </div>
+        <div class="form-group">
+          <label for="userEmail">Email</label>
+          <input type="email" id="userEmail" required placeholder="user@example.com" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="userPassword">Temporary Password</label>
+          <input type="text" id="userPassword" required placeholder="Minimum 6 characters" minlength="6" autocomplete="new-password">
+          <p class="form-hint">Share with the user. They can change it in Settings after signing in.</p>
+        </div>
+        <div class="form-group">
+          <label for="userRole">Role</label>
+          <select id="userRole">
+            <option value="patient">Patient</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <div class="form-error" id="userFormError" hidden></div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" onclick="closeUserModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="userSubmitBtn">Create User</button>
         </div>
       </form>
     </div>
@@ -716,30 +755,131 @@
       }
     }
 
-    // ===== Patients =====
+    // ===== Users / Patients =====
+    let users = [];
+
     async function loadPatients() {
-      const { data, error } = await db
-        .from('profiles')
-        .select('*')
-        .order('created_at', { ascending: false });
-      if (error) { console.error(error); return; }
-      renderPatientsTable(data || []);
+      try {
+        const { users: list } = await callAdminApi('GET');
+        users = list || [];
+        renderPatientsTable(users);
+        const patientCount = users.filter(u => u.role === 'patient').length;
+        const elCount = document.getElementById('countPatients');
+        if (elCount) elCount.textContent = patientCount;
+      } catch (err) {
+        console.error(err);
+        const tbody = document.getElementById('patientsTableBody');
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-light);">Failed to load users: ${escapeHtml(err.message)}</td></tr>`;
+      }
     }
 
     function renderPatientsTable(profiles) {
       const tbody = document.getElementById('patientsTableBody');
       if (!profiles.length) {
-        tbody.innerHTML = '<tr><td colspan="4"><div class="empty-state"><h3>No users yet</h3></div></td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5"><div class="empty-state"><h3>No users yet</h3><p>Click "+ Add User" to create one.</p></div></td></tr>';
         return;
       }
-      tbody.innerHTML = profiles.map(p => `
+      tbody.innerHTML = profiles.map(p => {
+        const isSelf = p.id === currentProfile.id;
+        return `
         <tr>
           <td><strong>${escapeHtml(p.full_name || '—')}</strong></td>
           <td>${escapeHtml(p.email)}</td>
-          <td><span class="badge badge-${p.role}">${p.role}</span></td>
+          <td>
+            <select class="role-select" data-user-id="${p.id}" onchange="changeUserRole('${p.id}', this.value, this)" ${isSelf ? 'disabled title="You cannot change your own role"' : ''}>
+              <option value="patient" ${p.role === 'patient' ? 'selected' : ''}>Patient</option>
+              <option value="admin" ${p.role === 'admin' ? 'selected' : ''}>Admin</option>
+            </select>
+          </td>
           <td>${formatDate(p.created_at)}</td>
+          <td>
+            <div class="table-actions">
+              ${isSelf ? '<span style="color:var(--text-light);font-size:0.75rem;">(you)</span>' : `<button class="btn-delete" onclick="requestDelete('user', '${p.id}', '${escapeHtml(p.email)}')">Delete</button>`}
+            </div>
+          </td>
         </tr>
-      `).join('');
+      `;}).join('');
+    }
+
+    async function getAuthToken() {
+      const { data: { session } } = await db.auth.getSession();
+      return session?.access_token;
+    }
+
+    async function callAdminApi(method, body) {
+      const token = await getAuthToken();
+      if (!token) throw new Error('Not signed in');
+      const res = await fetch('/api/admin/users', {
+        method,
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: body ? JSON.stringify(body) : undefined,
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(json.error || `Request failed (${res.status})`);
+      return json;
+    }
+
+    function openUserModal() {
+      document.getElementById('userFullName').value = '';
+      document.getElementById('userEmail').value = '';
+      document.getElementById('userPassword').value = '';
+      document.getElementById('userRole').value = 'patient';
+      document.getElementById('userFormError').hidden = true;
+      document.getElementById('userSubmitBtn').disabled = false;
+      document.getElementById('userSubmitBtn').textContent = 'Create User';
+      document.getElementById('userModal').classList.add('active');
+    }
+
+    function closeUserModal() {
+      document.getElementById('userModal').classList.remove('active');
+    }
+
+    async function saveUser(e) {
+      e.preventDefault();
+      const btn = document.getElementById('userSubmitBtn');
+      const errorEl = document.getElementById('userFormError');
+      errorEl.hidden = true;
+      btn.disabled = true;
+      btn.textContent = 'Creating...';
+      try {
+        await callAdminApi('POST', {
+          email: document.getElementById('userEmail').value.trim(),
+          password: document.getElementById('userPassword').value,
+          full_name: document.getElementById('userFullName').value.trim(),
+          role: document.getElementById('userRole').value,
+        });
+        closeUserModal();
+        showToast('User created!', 'success');
+        loadPatients();
+        loadDashboard();
+      } catch (err) {
+        errorEl.textContent = err.message;
+        errorEl.hidden = false;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Create User';
+      }
+    }
+
+    async function changeUserRole(id, role, selectEl) {
+      const prev = users.find(u => u.id === id)?.role;
+      if (prev === role) return;
+      selectEl.disabled = true;
+      try {
+        await callAdminApi('PATCH', { id, role });
+        const u = users.find(u => u.id === id);
+        if (u) u.role = role;
+        showToast('Role updated.', 'success');
+        loadDashboard();
+      } catch (err) {
+        selectEl.value = prev;
+        showToast(err.message, 'error');
+      } finally {
+        selectEl.disabled = false;
+      }
     }
 
     // ===== Confirm Delete =====
@@ -775,6 +915,14 @@
         await db.from('videos').delete().eq('id', id);
         showToast('Video deleted.', 'success');
         loadVideos();
+      } else if (type === 'user') {
+        try {
+          await callAdminApi('DELETE', { id });
+          showToast('User deleted.', 'success');
+          loadPatients();
+        } catch (err) {
+          showToast(err.message, 'error');
+        }
       }
 
       loadDashboard();
